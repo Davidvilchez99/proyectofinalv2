@@ -1,0 +1,70 @@
+<!-- <button [routerLink]="['/usuario-privado']">Volver</button> -->
+<h1>Crear paciente / profesional</h1>
+<select [(ngModel)]="tipo">
+    <option value="paciente">Paciente</option>
+    <option value="profesional">Profesional</option>
+</select>
+<br>
+<form *ngIf="tipo == 'paciente'">
+    <label>Nombre</label>
+    <input [(ngModel)]="nombre" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your name" />
+    <br>
+    <label>Apellidos</label>
+    <input [(ngModel)]="apellidos" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your surname" />
+    <br>
+    <label>Dirección</label>
+    <input [(ngModel)]="direccion" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your address" />
+    <br>
+    <label>Teléfono</label>
+    <input [(ngModel)]="telefono" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your phone number" />
+    <br>
+    <label>Correo electrónico</label>
+    <input [(ngModel)]="email" [ngModelOptions]="{standalone:true}" type="email"  placeholder="Enter your email" />
+    <br>
+    <label>Dni</label>
+    <input [(ngModel)]="dni" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your dni" />    
+    <br>
+    <label>Presupuesto</label>
+    <input [(ngModel)]="presupuesto" [ngModelOptions]="{standalone:true}" type="number" min="0"  placeholder="Enter your budget" />
+    <br>
+    <label>Contraseña</label>
+    <input [(ngModel)]="contrasena" [ngModelOptions]="{standalone:true}" type="password" placeholder="Enter your password" />
+    <br>
+    <input type="submit" (click)="crearPaciente()" value="Crear"/>
+</form>
+<form *ngIf="tipo == 'profesional'">
+    <label>Nombre</label>
+    <input [(ngModel)]="nombre" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your name" />
+    <br>
+    <label>Apellidos</label>
+    <input [(ngModel)]="apellidos" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your surname" />
+    <br>
+    <label>Dirección</label>
+    <input [(ngModel)]="direccion" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your address" />
+    <br>
+    <label>Teléfono</label>
+    <input [(ngModel)]="telefono" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your phone number" />
+    <br>
+    <label>Correo electrónico</label>
+    <input [(ngModel)]="email" [ngModelOptions]="{standalone:true}" type="email"  placeholder="Enter your email" />
+    <br>
+    <label>Dni</label>
+    <input [(ngModel)]="dni" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your dni" />
+    <br>
+    <label>Cuenta bancaria</label>
+    <input [(ngModel)]="cuentaBancaria" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your bank account" />
+    <br>
+    <label>Salario</label>
+    <input [(ngModel)]="salario" [ngModelOptions]="{standalone:true}" type="number" min="0"  placeholder="Enter your salary" />
+    <br>
+    <label>Horario</label>
+    <input [(ngModel)]="horario" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your schedule" />
+    <br>
+    <label>Cargo</label>
+    <input [(ngModel)]="cargo" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your position" />
+    <br>
+    <label>Contraseña</label>
+    <input [(ngModel)]="contrasena" [ngModelOptions]="{standalone:true}" type="password" placeholder="Enter your password" />
+    <br>
+    <input type="submit" (click)="crearProfesional()" value="Crear"/>
+</form>

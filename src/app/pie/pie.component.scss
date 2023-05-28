@@ -1,0 +1,14 @@
+@import '../../styles/mixin.scss';
+
+footer{
+    background-color: #0c354a;
+    color: white;
+    padding: 5%;
+
+    @include flex(center, normal, row);
+
+    i{
+        font-size: 2em;
+        color: aliceblue;
+    }
+}

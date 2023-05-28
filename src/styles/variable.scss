@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+//fuente principal
+///
+$font-family: "Nunito", sans-serif;
+//fuente secundaria
+///
+$font-family2: 'Tilt Neon';
+
+/*paleta de colores*/
+/// mapa de colores
+/// @group colores
+$colors: (
+    primary: white,
+    secundary: rgb(154, 120, 35),
+    terciary: gray,
+    quaternary: black,
+    quinary: lightgray,
+    );
+/// Función que devuelve un color del vector colores
+/// @group colores
+/// @param {string} $color-name --nombre color del vector colores
+/// @return {color} -Color
+
+@function color ($color-name){
+    @return map-get($colors, $color-name);
+}
+/*paleta de tamaños*/
+/// mapa de tamaños
+/// @group tamaños
+$font-sizes: (
+    xl: 3rem,
+    xxl: 6rem,
+    sm: 1.8rem,
+);
+
+/// Función que devuelve un tamaño del vector tamaños
+/// @group tamaños
+/// @param {string} $font-size --nombre color del vector tamaños
+/// @return {tamaño} -Tamaño
+@function size ($font-size){
+    @return map-get($font-sizes, $font-size);
+}
+/*paleta de tallas*/
+/// mapa de tallas
+/// @group tallas
+$fonts-weight: (
+    "ligth": 500,
+    "regular": 600,
+    "bold": 800
+);
+
+/// Función que devuelve una talla del vector tallas
+/// @group tallas
+/// @param {string} $font-weight --nombre color del vector tallas
+/// @return {talla} -Talla
+@function weight ($font-weight){
+    @return map-get($fonts-weight, $font-weight);
+}

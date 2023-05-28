@@ -1,0 +1,11 @@
+<div>
+    <form>
+    <label>Usuario</label>
+    <input [(ngModel)]="username" [ngModelOptions]="{standalone:true}" type="email"  placeholder="Enter your email" />
+    <br>
+    <label>Contraseña</label>
+    <input [(ngModel)]="password" [ngModelOptions]="{standalone:true}" type="password" placeholder="Enter your password" />
+    <br>
+    <input type="submit" (click)="loginUsuario()" value="Acceder"/>
+</form> 
+</div>

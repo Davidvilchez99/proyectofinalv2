@@ -1,0 +1,31 @@
+<h3>Bienvenido {{this.Usuario.emailUser}}</h3>
+<div *ngIf="this.Usuario.rol == 'administrativo'">
+    <p>Aministrativo</p>
+    <button [routerLink]="['/crear-paciente']">Crear paciente</button>
+    <button [routerLink]="['/crear-cita']">Crear cita</button><hr>
+    <p *ngFor="let cita of this.Usuario.citas">
+        {{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.dni_profesional }}
+    </p>
+    <hr>
+    <div>
+        <p *ngFor="let usuario of this.usuarios">
+            {{ usuario.nombre }} - {{ usuario.apellidos }}- {{ usuario.dni }}- {{ usuario.rol }}
+            <button [routerLink]="['/editar-usuario',usuario.dni]">Editar</button>
+        </p>
+    </div>
+</div>
+<div *ngIf="this.Usuario.rol == 'profesional'">
+    <p>Profesional</p>
+    <button [routerLink]="['/crear-cita']">Crear cita</button>
+
+    <hr>
+    <p *ngFor="let cita of this.Usuario.citas">
+        {{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.dni_profesional }}
+    </p>
+</div>
+<div *ngIf="this.Usuario.rol == 'paciente'">
+    <p>paciente</p><hr>
+    <p *ngFor="let cita of this.Usuario.citas">
+        {{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.dni_profesional }}
+    </p>
+</div>

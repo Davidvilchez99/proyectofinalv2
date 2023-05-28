@@ -1,0 +1,9 @@
+<button *ngIf="Usuario.estaLogueado">Crear comentario</button>
+
+<div *ngFor="let comentario of datos">
+    {{comentario.nombre}}
+    {{comentario.comentario}}
+    {{comentario.fecha}}
+    {{comentario.valoracion}}
+    {{comentario.profesional}}
+</div>

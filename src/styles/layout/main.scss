@@ -1,0 +1,9 @@
+/// Componente: main
+main{
+    @include grid(8, repeat(8, min-content), 3);
+}
+@include response(md){
+    main{
+        display: contents;
+    }
+}

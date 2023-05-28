@@ -1,0 +1,45 @@
+/// Componente: footer
+footer{
+    @include flex($alignitem:none);
+    padding: 3%;
+    .footer-div{
+        border-top: 2px solid color(secundary);
+        width: 33.3%;
+        #footer-links{
+            @include flex($alignitem:none);
+            width: 100%;
+            div{
+                width: 50%;
+                border: none;
+            }
+        }
+    }
+    h5{
+        color: color(secundary);
+        margin: 3%;
+        font-size: 1.2em;
+        height: 20%;
+    }
+
+    p{
+        margin: 0.2%;
+    }
+}
+
+@include response(md){
+    footer{
+        flex-direction: column;
+        align-items: center;
+        .footer-div{
+            border-top: 2px solid color(secundary);
+            width: 100%;
+            border-bottom: none;
+            padding: 2%s;
+        }
+        h5{
+            width: 100%;
+            text-align: center;
+        }
+    }
+    
+}
