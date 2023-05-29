@@ -7,13 +7,14 @@
         {{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.dni_profesional }}
     </p>
     <hr>
-    <div>
+    <div id="usuarios">
         <p *ngFor="let usuario of this.usuarios">
             {{ usuario.nombre }} - {{ usuario.apellidos }}- {{ usuario.dni }}- {{ usuario.rol }}
             <button [routerLink]="['/editar-usuario',usuario.dni]">Editar</button>
         </p>
     </div>
 </div>
+
 <div *ngIf="this.Usuario.rol == 'profesional'">
     <p>Profesional</p>
     <button [routerLink]="['/crear-cita']">Crear cita</button>

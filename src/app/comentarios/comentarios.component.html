@@ -1,4 +1,4 @@
-<button *ngIf="Usuario.estaLogueado">Crear comentario</button>
+<button *ngIf="Usuario.estaLogueado" [routerLink]="['/crear-comentario']">Crear comentario</button>
 
 <div *ngFor="let comentario of datos">
     {{comentario.nombre}}
@@ -6,4 +6,6 @@
     {{comentario.fecha}}
     {{comentario.valoracion}}
     {{comentario.profesional}}
+
+    <br>
 </div>

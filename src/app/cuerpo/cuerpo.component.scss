@@ -14,60 +14,68 @@ main {
         height: 100vh;
     }
 
-    .carousel-item{
+    .carousel-item {
         height: 80vh;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
 
-    &:nth-child(1) {
-        background-image: url('../../assets/images/imagen_niña_inicio.jpg');
+        &:nth-child(1) {
+            background-image: url('../../assets/images/imagen_niña_inicio.jpg');
+        }
+
+        &:nth-child(2) {
+            background-image: url('../../assets/images/AdobeStock_84031495_large.jpg');
+        }
+
+        &:nth-child(3) {
+            background-image: url('../../assets/images/Couple_large.jpg');
+        }
     }
-    &:nth-child(2) {
-        background-image: url('../../assets/images/AdobeStock_84031495_large.jpg');
-    }
-    &:nth-child(3) {
-        background-image: url('../../assets/images/Couple_large.jpg');
-    }}
 }
 
-#cuadrados-principales{
+#cuadrados-principales {
     grid-row: 2/ 3;
     grid-column: 1 / -1;
     color: white;
     @include flex(center, center, row);
     width: 97vw;
     position: absolute;
-    top : 70vh;
+    top: 70vh;
     text-align: center;
-    div{
+
+    div {
         height: 40vh;
         padding: 1%;
         width: 20%;
         padding: auto;
-        img{
+
+        img {
             width: 40%;
         }
     }
-    div:nth-child(odd){
+
+    div:nth-child(odd) {
         background-color: #59abb3;
     }
 
-    div:nth-child(even){
+    div:nth-child(even) {
         background-color: #499aa2;
     }
 
-    div:nth-child(1){
+    div:nth-child(1) {
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
     }
-    div:nth-child(4){
+
+    div:nth-child(4) {
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
     }
 
 }
-#welcome{
+
+#welcome {
     grid-row: 3/ 4;
     grid-column: 1 / -1;
 
@@ -75,26 +83,27 @@ main {
     padding-top: 20%;
     padding-bottom: 5%;
 
-    #welcome-father{
+    #welcome-father {
         width: 75vw;
         margin: auto;
 
-        #welcome-son:nth-child(1){
+        #welcome-son:nth-child(1) {
             margin: 1%;
             width: 100%;
         }
 
-        #welcome-son:nth-child(2){
+        #welcome-son:nth-child(2) {
             @include flex(center, normal, row);
 
-            #welcome-son1{
+            #welcome-son1 {
                 width: 70%;
             }
 
-            #welcome-son2{
+            #welcome-son2 {
                 width: 30%;
                 padding: 1%;
-                img{
+
+                img {
                     width: 100%;
                 }
             }
@@ -105,20 +114,20 @@ main {
     }
 }
 
-#schedule{
+#schedule {
     grid-row: 4/ 5;
     grid-column: 1 / -1;
     background-color: #dfeef0;
 
 
-    #schedule-father{
+    #schedule-father {
         padding-top: 5%;
         padding-bottom: 5%;
         background-color: #0c354a;
         color: white;
         text-align: center;
-        
-        p{
+
+        p {
             margin-bottom: 0;
         }
     }
@@ -127,49 +136,50 @@ main {
         border-left: 49.275vw solid transparent;
         border-right: 49.275vw solid transparent;
         border-bottom: 100px solid #0c354a;
-      }
+    }
 
-      .pico2 {
+    .pico2 {
         border-left: 49.275vw solid transparent;
         border-right: 49.275vw solid transparent;
         border-top: 100px solid #0c354a;
         background-color: #e5e5e5;
-      }
+    }
 }
 
 
-#dientes-seccion{
+#dientes-seccion {
     grid-row: 5/ 6;
     grid-column: 1 / -1;
 
     background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center center;
-        background-image: url('../../assets/images/BackgroundGrey.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-image: url('../../assets/images/BackgroundGrey.jpg');
 
 
     padding: 5%;
 
-    #welcome-father{
+    #welcome-father {
         width: 75vw;
         margin: auto;
 
-        #welcome-son:nth-child(1){
+        #welcome-son:nth-child(1) {
             margin: 1%;
             width: 100%;
         }
 
-        #welcome-son:nth-child(2){
+        #welcome-son:nth-child(2) {
             @include flex(center, normal, row);
 
-            #welcome-son1{
+            #welcome-son1 {
                 width: 70%;
             }
 
-            #welcome-son2{
+            #welcome-son2 {
                 width: 30%;
                 padding: 1%;
-                img{
+
+                img {
                     width: 100%;
                 }
             }
@@ -184,53 +194,72 @@ main {
         width: 400px;
         height: 200px;
         overflow: hidden;
-      }
-  
-      .teeth {
+    }
+
+    .teeth {
         width: 100%;
         height: 100%;
         position: absolute;
         top: 0;
         left: 0;
         transition: opacity 0.5s ease;
-      }
-  
-      .teeth.yellow {
+    }
+
+    .teeth.yellow {
         opacity: 1;
-      }
-  
-      .teeth.white {
+    }
+
+    .teeth.white {
         opacity: 0;
-      }
-  
-      .container:hover .teeth.yellow {
+    }
+
+
+    .container:hover .divider {
+        left: 30%;
+    }
+
+    .container:hover .teeth.yellow {
         opacity: 0;
-      }
-  
-      .container:hover .teeth.white {
+    }
+
+    .container:hover .teeth.white {
         opacity: 1;
-      }
+    }
+
+    .instruction {
+        position: absolute;
+        color: white;
+        font-size: 20px;
+        text-align: center;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+
+    .container:hover .instruction {
+        opacity: 0;
+    }
+
 
 }
 
 
-#coments{
+#coments {
     grid-row: 7/ 8;
     grid-column: 1 / -1;
 
     text-align: center;
     padding: 5%;
-    
+
     background-color: #09405e;
     color: white;
 }
 
-#contact{
+#contact {
     grid-row: 8/ 9;
     grid-column: 1 / -1;
-    color: white;
-    @include flex(center, center, column);
-
+    color: #0c354a;
+    // @include flex(center, center, column);
+    text-align: center;
     background-image: url('../../assets/images/AdobeStock_61119644_xlarge.jpg');
     background-repeat: no-repeat;
     background-size: cover;

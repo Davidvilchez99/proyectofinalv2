@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { doc, Firestore, collectionData, collection, query, where, addDoc, setDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { getFirestore } from 'firebase/firestore';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,13 @@ export class DatosService {
   constructor(public firestore : Firestore) { 
 
   }
+
+  getUserWithEmail(email: string): Observable<any[]> {
+    const datos = collection(this.firestore, 'usuarios');
+    const q = query(datos, where("email", "==", email));
+    return collectionData(q, { idField: 'id' });
+  }
+
   getComentarios(): Observable<any[]> {
     const datos = collection(this.firestore, 'comentarios');
     return collectionData(datos, { idField: 'id' });
@@ -98,6 +106,16 @@ export class DatosService {
       presupuesto: datosUsuario.presupuesto,
       contraseña: datosUsuario.contraseña,
       fecha: datosUsuario.fecha
+    });
+  }
+
+  crearComentario(comentario: any, fecha:string){
+    addDoc(collection(this.db, "comentarios"), {
+      nombre: comentario.nombre,
+      comentario: comentario.comentario,
+      fecha: fecha,
+      profesional: comentario.profesional,
+      valoracion: comentario.valoracion
     });
   }
 }

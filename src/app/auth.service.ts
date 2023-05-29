@@ -15,6 +15,7 @@ export class AuthService {
   userId: string = "";
   emailUser: string = "";
   dni: string = "";
+  nombre: string = "";
   estaLogueado: boolean = false;
   logueado: boolean = false;
   rol : string = "";
@@ -29,7 +30,7 @@ export class AuthService {
     this.comprobarSiEstaLogueado(this.auth);
   }
 
-  
+
   
   editarUsuario(email: string, contraseña: string){
       // cambiar la contraseña a un usuario ya creado mediante el email
@@ -121,6 +122,7 @@ export class AuthService {
       const datosUsuario = collectionData(q, { idField: 'email' });
       datosUsuario.subscribe((datos: any) => {
         this.rol = datos[0].rol;
+        this.nombre = datos[0].nombre;
         if (this.rol == "paciente") {
           this.obtenerCitasPaciente();
         }else if (this.rol == "profesional") {
@@ -131,26 +133,16 @@ export class AuthService {
       );
     }
 
-    // obtenerDniUsuario() {
-    //   const datos = collection(this.firestore, 'usuarios');
-    //   const q = query(datos, where("email", "==", this.emailUser));
-    //   const datosUsuario = collectionData(q, { idField: 'email' });
-    //   datosUsuario.subscribe((datos: any) => {
-    //     this.dni = datos[0].dni;  
-    //   }
-    //   );      
-    // }
     
     obtenerCitasPaciente (){
       const datos = collection(this.firestore, 'usuarios');
       const q = query(datos, where("email", "==", this.emailUser));
       const datosUsuario = collectionData(q, { idField: 'email' });
       datosUsuario.subscribe((datos: any) => {
-        this.dni = datos[0].dni;  
+        this.dni = datos[0].dni; 
 
         this.datos.getCitasdePacientes(this.dni).subscribe((citas) => {
           this.citas = citas;
-          console.log(this.citas);
       });
         }
         

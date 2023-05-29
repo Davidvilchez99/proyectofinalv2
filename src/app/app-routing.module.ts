@@ -11,6 +11,7 @@ import { CrearCitaComponent } from './crear-cita/crear-cita.component';
 import { CrearPacienteComponent } from './crear-paciente/crear-paciente.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 
+import { CrearComentarioComponent } from './crear-comentario/crear-comentario.component';
 
 
 const routes: Routes = [
@@ -49,6 +50,10 @@ const routes: Routes = [
   {
     path: 'editar-usuario/:dni',
     component: EditarUsuarioComponent
+  },
+  {
+    path: 'crear-comentario',
+    component: CrearComentarioComponent,
   }
 
 ];

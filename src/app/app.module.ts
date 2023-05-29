@@ -21,6 +21,7 @@ import { UsuarioPrivadoComponent } from './usuario-privado/usuario-privado.compo
 import { CrearPacienteComponent } from './crear-paciente/crear-paciente.component';
 import { CrearCitaComponent } from './crear-cita/crear-cita.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
+import { CrearComentarioComponent } from './crear-comentario/crear-comentario.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.componen
     UsuarioPrivadoComponent,
     CrearPacienteComponent,
     CrearCitaComponent,
-    EditarUsuarioComponent
+    EditarUsuarioComponent,
+    CrearComentarioComponent
   ],
   imports: [
     BrowserModule,

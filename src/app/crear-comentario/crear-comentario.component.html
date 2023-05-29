@@ -1,0 +1,18 @@
+<h2>Crear comentario</h2>
+<form>
+    <label>Nombre</label>
+    <input type="text" name="nombre" readonly [(ngModel)]="comentario.nombre" />
+    <br>
+    <label>Comentario</label>
+    <input type="text" name="comentario" [(ngModel)]="comentario.comentario" />
+    <br>
+    <label>Valoracion</label>
+    <input type="text" name="valoracion" [(ngModel)]="comentario.valoracion" />
+    <br>
+    <label>Profesional</label>
+    <select [(ngModel)]="comentario.profesional" [ngModelOptions]="{standalone:true}">
+        <option *ngFor="let profesional of profesionales" value="{{profesional.nombre}}">{{profesional.nombre}}</option>
+    </select>
+    <br>
+    <button (click)="crearComentario()">Crear comentario</button>
+</form>
