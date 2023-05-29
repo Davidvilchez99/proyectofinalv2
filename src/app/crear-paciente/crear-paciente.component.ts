@@ -38,14 +38,12 @@ export class CrearPacienteComponent {
 
     crearPaciente() {
       this.rol = "paciente";
-      this.Usuario.crearUsuario(this.email, this.contrasena);
       this.Datos.crearPaciente(this.rol, this.nombre, this.apellidos, this.telefono, this.email, this.direccion, this.dni, this.presupuesto, this.contrasena, this.getFechactual());
       this.router.navigate(['/usuario-privado']);
     }
 
     crearProfesional(){
       this.rol = "profesional";
-      this.Usuario.crearUsuario(this.email, this.contrasena);
       this.Datos.crearProfeisonal(this.rol, this.nombre, this.apellidos, this.telefono, this.email, this.direccion, this.dni, this.cuentaBancaria, this.salario, this.horario, this.cargo, this.contrasena, this.getFechactual());
       this.router.navigate(['/usuario-privado']);
 }

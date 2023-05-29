@@ -5,12 +5,14 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { DatosService } from './datos.service';
+import { Router } from '@angular/router';
 
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
+
 export class AuthService {
   userId: string = "";
   emailUser: string = "";
@@ -20,100 +22,165 @@ export class AuthService {
   logueado: boolean = false;
   rol : string = "";
   citas : any[] = [];
-  private auth: Auth;
-  private originalAuth: Auth;
+  // private auth: Auth;
+  // private originalAuth: Auth;
 
   
-  constructor(public firestore: Firestore, public datos : DatosService) {
-    this.auth = getAuth();
-    this.originalAuth = this.auth; // Almacena la instancia original de autenticación
-    this.comprobarSiEstaLogueado(this.auth);
+  constructor(public firestore: Firestore, public datos: DatosService, public router: Router) {
+    this.restoreAuthState();
   }
 
+  private restoreAuthState() {
+    const authState = localStorage.getItem('authState');
+    if (authState) {
+      const {
+        userId,
+        emailUser,
+        estaLogueado,
+        logueado,
+        rol,
+        nombre,
+      } = JSON.parse(authState);
+      this.userId = userId;
+      this.emailUser = emailUser;
+      this.estaLogueado = estaLogueado;
+      this.logueado = logueado;
+      this.rol = rol;
+      this.nombre = nombre;
 
-  
-  editarUsuario(email: string, contraseña: string){
-      // cambiar la contraseña a un usuario ya creado mediante el email
-      signInWithEmailAndPassword(this.auth, email, contraseña)
-      .then((userCredential) => {
-        // Actualiza la contraseña
-        updatePassword(userCredential.user, contraseña).then(() => {
-          // Actualización de contraseña exitosa
-          console.log("contraseña actualizada");
-          // Restablece la instancia original de autenticación
-          this.auth = this.originalAuth;
-          // ...
-        }).catch((error) => {
-          // Error al actualizar la contraseña
-          // ...
-        });
+      if (rol === 'paciente') {
+        this.obtenerCitasPaciente();
+      } else if (rol === 'profesional') {
+        this.obtenerCitasProfesional();
       }
-      );
-  }
-
-
-  login(usuario: string, contraseña: string) {
-    signInWithEmailAndPassword(this.auth, usuario, contraseña)
-      .then((userCredential) => {
-        // Inicio de sesión exitoso
-        const user = userCredential.user;
-        this.userId = user.uid;
-        this.emailUser = user.email || "";
-        this.estaLogueado = true;
-        this.logueado = true;
-        // consultar rol de usuario en base de datos usuarios
-        this.consultarRolUsuario();
-        // this.obtenerCitasPaciente();
-        // this.obtenerCitasProfesional();
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ...
-      });
-  }
-
-    crearUsuario(usuario: string, contraseña: string) {
-      createUserWithEmailAndPassword(this.auth, usuario, contraseña)
-        .then((userCredential) => {
-          // El usuario se creó correctamente
-          console.log("usuario creado");
-          // Restablece la instancia original de autenticación
-          this.auth = this.originalAuth;
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // ...
-        });
     }
+  }
+
+  private saveAuthState() {
+    const authState = JSON.stringify({
+      userId: this.userId,
+      emailUser: this.emailUser,
+      estaLogueado: this.estaLogueado,
+      logueado: this.logueado,
+      rol: this.rol,
+      nombre: this.nombre,
+    });
+    localStorage.setItem('authState', authState);
+  }
+
+  login(usuarioData: string, contraseñaData: string) {
+    this.datos.getUsuarios().subscribe((usuarios) => {
+      for (let usuario of usuarios) {
+        if (usuario.email == usuarioData && usuario.contraseña == contraseñaData) {
+          this.estaLogueado = true;
+          this.logueado = true;
+          this.emailUser = usuario.email;
+          this.rol = usuario.rol;
+          this.nombre = usuario.nombre;
+
+          console.log(this.rol, this.nombre, this.emailUser, this.estaLogueado, this.logueado);
+          if (this.rol == 'paciente') {
+            this.obtenerCitasPaciente();
+          } else if (this.rol == 'profesional') {
+            this.obtenerCitasProfesional();
+          }
+
+          this.saveAuthState(); // Guardar estado de autenticación
+        }
+      }
+    });
+  }
+  
+  // editarUsuario(email: string, contraseña: string){
+  //     // cambiar la contraseña a un usuario ya creado mediante el email
+  //     signInWithEmailAndPassword(this.auth, email, contraseña)
+  //     .then((userCredential) => {
+  //       // Actualiza la contraseña
+  //       updatePassword(userCredential.user, contraseña).then(() => {
+  //         // Actualización de contraseña exitosa
+  //         console.log("contraseña actualizada");
+  //         // Restablece la instancia original de autenticación
+  //         this.auth = this.originalAuth;
+  //         // ...
+  //       }).catch((error) => {
+  //         // Error al actualizar la contraseña
+  //         // ...
+  //       });
+  //     }
+  //     );
+  // }
+
+
+  // login(usuario: string, contraseña: string) {
+  //   signInWithEmailAndPassword(this.auth, usuario, contraseña)
+  //     .then((userCredential) => {
+  //       // Inicio de sesión exitoso
+  //       const user = userCredential.user;
+  //       this.userId = user.uid;
+  //       this.emailUser = user.email || "";
+  //       this.estaLogueado = true;
+  //       this.logueado = true;
+  //       // consultar rol de usuario en base de datos usuarios
+  //       this.consultarRolUsuario();
+  //       // this.obtenerCitasPaciente();
+  //       // this.obtenerCitasProfesional();
+  //       // ...
+  //     })
+  //     .catch((error) => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       // ...
+  //     });
+  // }
+
+    // crearUsuario(usuario: string, contraseña: string) {
+    //   createUserWithEmailAndPassword(this.auth, usuario, contraseña)
+    //     .then((userCredential) => {
+    //       // El usuario se creó correctamente
+    //       console.log("usuario creado");
+    //       // Restablece la instancia original de autenticación
+    //       this.auth = this.originalAuth;
+    //       // ...
+    //     })
+    //     .catch((error) => {
+    //       const errorCode = error.code;
+    //       const errorMessage = error.message;
+    //       // ...
+    //     });
+    // }
   
 
-    comprobarSiEstaLogueado(auth: any) {
-      onAuthStateChanged(auth, (user: any) => {
-        if (user) {
-          const userId = user.uid;
-          const emailUser = user.email;
+//     comprobarSiEstaLogueado(auth: any) {
+//       onAuthStateChanged(auth, (user: any) => {
+//         if (user) {
+//           const userId = user.uid;
+//           const emailUser = user.email;
     
-          if (!this.estaLogueado) {
-            // Actualiza los datos del usuario solo si no se ha iniciado sesión anteriormente
-            this.userId = userId;
-            this.emailUser = emailUser;
-            this.estaLogueado = true;
-            // consultar rol de usuario en base de datos usuarios
-            this.consultarRolUsuario();
-            // this.obtenerCitasPaciente();
-            // this.obtenerCitasProfesional();          
-}
-        } else {
-          this.userId = "";
-          this.emailUser = "";
-          this.estaLogueado = false;
-        }
-      });
+//           if (!this.estaLogueado) {
+//             // Actualiza los datos del usuario solo si no se ha iniciado sesión anteriormente
+//             this.userId = userId;
+//             this.emailUser = emailUser;
+//             this.estaLogueado = true;
+//             // consultar rol de usuario en base de datos usuarios
+//             this.consultarRolUsuario();
+//             // this.obtenerCitasPaciente();
+//             // this.obtenerCitasProfesional();          
+// }
+//         } else {
+//           this.userId = "";
+//           this.emailUser = "";
+//           this.estaLogueado = false;
+//         }
+//       });
+//     }
+
+    comprobarSiEstaLogueado() {
+      // if (this.estaLogueado) {
+        
+      // }
+      console.log(this.estaLogueado, this.logueado, this.emailUser, this.rol, this.nombre);
     }
+    
 
     consultarRolUsuario() {
       // consultar rol de usuario en base de datos usuarios
@@ -168,14 +235,15 @@ export class AuthService {
 
 
     cerrarSesion() {
-      signOut(this.auth).then(() => {
-        // Sign-out successful.
-        console.log("sesion cerrada");
-        this.estaLogueado = false;
-        console.log(this.estaLogueado);
-      }).catch((error) => {
-        // An error happened.
-      });
+      this.estaLogueado = false;
+      this.logueado = false;
+      this.userId = '';
+      this.emailUser = '';
+      this.rol = '';
+      this.nombre = '';
+      this.citas = [];
+      localStorage.removeItem('authState'); // Eliminar estado de autenticación almacenado
+      this.router.navigate(['']);
     }
 
 }

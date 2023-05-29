@@ -32,4 +32,8 @@ export class EditarUsuarioComponent implements OnInit {
     this.datosService.editarUsuario(this.datosUsuario);
     // this.auth.editarUsuario(this.datosUsuario.email, this.datosUsuario.contrasena);
   }
+
+  borrarUsuario() {
+    this.datosService.borrarUsuario(this.datosUsuario.dni);
+  }
 }

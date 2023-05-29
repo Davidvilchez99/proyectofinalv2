@@ -15,13 +15,15 @@ export class UsuarioPrivadoComponent {
   usuarios: any[] = []; 
 
   constructor(public Usuario: AuthService, public datosService: DatosService) {
-    datosService.getUsuarios().subscribe((usuarios) => {        
-      for (let i = 0; i<usuarios.length; i++) {
-        if (usuarios[i].rol == "paciente" || usuarios[i].rol == "profesional") {
-          this.usuarios.push(usuarios[i]);
+    datosService.getUsuarios().subscribe((usuarios) => {
+      for (let i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].rol === 'paciente' || usuarios[i].rol === 'profesional') {
+          // Verificar si el usuario ya existe en la lista
+          if (!this.usuarios.find((user) => user.id === usuarios[i].id)) {
+            this.usuarios.push(usuarios[i]);
+          }
         }
       }
     });
-}
-
+  }
 }

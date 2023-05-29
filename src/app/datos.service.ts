@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { doc, Firestore, collectionData, collection, query, where, addDoc, setDoc } from '@angular/fire/firestore';
+import { doc, Firestore, collectionData, collection, query, where, addDoc, setDoc, deleteDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { getFirestore } from 'firebase/firestore';
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class DatosService {
 
   db = getFirestore();
 
-  constructor(public firestore : Firestore) { 
+  constructor(public firestore : Firestore, public router: Router) { 
 
   }
 
@@ -107,6 +108,7 @@ export class DatosService {
       contraseña: datosUsuario.contraseña,
       fecha: datosUsuario.fecha
     });
+    this.router.navigate(['usuario-privado']);
   }
 
   crearComentario(comentario: any, fecha:string){
@@ -118,4 +120,11 @@ export class DatosService {
       valoracion: comentario.valoracion
     });
   }
+
+  borrarUsuario(dni:string){
+    // eliminar usuario de la base de datos de firebase por su dni
+    deleteDoc(doc(this.db, "usuarios", dni));
+    
+    this.router.navigate(['usuario-privado']);
+  };
 }
