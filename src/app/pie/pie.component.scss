@@ -3,12 +3,56 @@
 footer{
     background-color: #0c354a;
     color: white;
-    padding: 5%;
+    padding: 3%;
+    font-size: 1.2em;
 
-    @include flex(center, normal, row);
 
-    i{
-        font-size: 2em;
-        color: aliceblue;
+    .container{
+        @include flex();
+
+        div:nth-child(3){
+            width: 15%;
+        }
+
+        ul{
+            list-style: none;
+
+            li:hover{
+                color: #ffa516;
+            }
+
+            #scrollToTopButton {
+                display: none;
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 99;
+                font-size: 16px;
+                border: none;
+                outline: none;
+                background-color: #59abb3;
+                color: white;
+                cursor: pointer;
+                padding: 15px;
+                border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+              }
+              
+              #scrollToTopButton:hover {
+                background-color: #3a7277;
+              }
+        }
+
+        i{
+            font-size: 2em;
+            color: white;
+            margin: 2%;
+        }
+        i:hover{
+            color: #ffa516;
+        }
+
+
     }
 }

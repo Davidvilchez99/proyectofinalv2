@@ -1,19 +1,25 @@
 <footer>
     <div class="container">
-        <div class="row">
-        <div class="col-md-12">
-            <p>© 2019 - Todos los derechos reservados</p>
+        <div>
+            <p>&copy; 2019 - All rights reserved</p>
         </div>
-        </div>
-    </div>
-    <div class="social-media">
-        <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook-f"></i></a>
-        <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
-        <a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
-        <a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube"></i></a>
-    </div>
-    <div>
-        <p>Return to top</p>
+        <div>
+            <ul>
+                <li [routerLink]="['']">Home</li>
+                <li *ngIf="!this.Usuario.estaLogueado"  [routerLink]="['/login']">Login</li>
+                <li (click)="cerrarSesion()" [routerLink]="['']">Salir
+                    ({{this.Usuario.emailUser}})</li>
+                <li [routerLink]="['/comentarios']">Coments</li>
+                <li id="scrollToTopButton" (click)="scrollToTop()">&#8593; Top</li>
 
+            </ul>
+        </div>
+        <div class="social-media">
+            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook-f"></i></a>
+            <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube"></i></a>
+        </div>
     </div>
 </footer>
+

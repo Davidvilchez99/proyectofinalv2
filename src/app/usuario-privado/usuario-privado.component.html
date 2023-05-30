@@ -1,8 +1,11 @@
+<section id="user-private">
+
+
 <h3>Bienvenido {{this.Usuario.emailUser}}</h3>
 <div *ngIf="this.Usuario.rol == 'administrativo'">
     <p>Aministrativo</p>
-    <button [routerLink]="['/crear-paciente']">Crear paciente</button>
-    <button [routerLink]="['/crear-cita']">Crear cita</button><hr>
+    <div id="botones"><button [routerLink]="['/crear-paciente']">Crear paciente</button>
+    <button [routerLink]="['/crear-cita']">Crear cita</button></div>
     <p *ngFor="let cita of this.Usuario.citas">
         {{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.dni_profesional }}
     </p>
@@ -30,3 +33,4 @@
         {{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.dni_profesional }}
     </p>
 </div>
+</section>

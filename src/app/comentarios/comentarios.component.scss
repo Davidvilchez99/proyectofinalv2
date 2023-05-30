@@ -1,0 +1,134 @@
+@import '../../styles/mixin.scss';
+
+#coments {
+  background-color: #59abb3;
+  height: 67.8vh;
+  @include flex(center, center, column);
+
+  hr{
+    width: 80%;
+    border: 2px solid #ffa516;
+    border-radius: 5px;
+    opacity: 1;
+  }
+
+  .filtro-container {
+    margin-bottom: 20px;
+    
+    label {
+      margin-right: 10px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    
+    select {
+      padding: 5px;
+      font-size: 1.2em;
+      /* Estilos para el select */
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      color: #0c354a;
+      font-size: 14px;
+      
+      &:hover {
+        border-color: #999;
+      }
+      
+      &:focus {
+        outline: none;
+        border-color: #0c354a;
+      }
+      
+      option {
+        background-color: #fff;
+        color: #0c354a;
+      }
+    }
+
+  }
+
+  .comentarios-container {
+    margin-top: 20px;
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #0c354a;
+    border-radius: 5px;
+    padding: 10px;
+    width: 50%;
+
+    /* Estilos para el scrollbar */
+    &::-webkit-scrollbar {
+      width: 10px;
+      background-color: #0c354a;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #f2f2f2;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #f2f2f2;
+    }
+  }
+
+  /* Estilos para cada comentario */
+  .comentario {
+    border: 1px solid #f2f2f2;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    
+    .comentario-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+      
+      .nombre {
+        font-weight: bold;
+      }
+      
+      .fecha {
+        color: #888;
+      }
+    }
+    
+    .comentario-content p {
+      margin: 0;
+      word-wrap: break-word;
+    }
+    
+    .comentario-valoracion {
+      display: flex;
+      justify-content: space-between;
+      
+      .valoracion {
+        font-weight: bold;
+      }
+      
+      .profesional {
+        color: #888;
+      }
+    }
+  }
+
+  .comentarios-btn{
+    margin: 2%;
+    button{
+        background-color: #0c354a;
+        border: none;
+        border-radius: 5px;
+        padding: 5px;
+        color: #f2f2f2;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        &:hover {
+            background-color: #0c354a;
+            color: #ffa516;
+        }
+    }
+  }
+}

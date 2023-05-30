@@ -1,11 +1,39 @@
-<button *ngIf="Usuario.estaLogueado" [routerLink]="['/crear-comentario']">Crear comentario</button>
+<section id="coments">
+    
+    <h1>Comentarios de pacientes y profesionales</h1>
+    <hr>
+    <div class="filtro-container">
+        <label for="valoracion">Filtrar por valoración:</label>
+      <select id="valoracion" [(ngModel)]="filtroValoracion" (change)="filtrarComentarios()">
+        <option value="" selected>Todas las valoraciones</option>
+        <option value="1">1 estrella</option>
+        <option value="2">2 estrellas</option>
+        <option value="3">3 estrellas</option>
+        <option value="4">4 estrellas</option>
+        <option value="5">5 estrellas</option>
+      </select>
+    </div>
+    
+    
+    <div class="comentarios-container">
+      <div *ngFor="let comentario of comentariosFiltrados" class="comentario">
+        <div class="comentario-info">
+          <span class="nombre">{{ comentario.nombre }}</span>
+          <span class="fecha">{{ comentario.fecha }}</span>
+        </div>
+        <div class="comentario-content">
+          <p>{{ comentario.comentario }}</p>
+        </div>
+        <div class="comentario-valoracion">
+          <span class="valoracion">{{ comentario.valoracion }}</span>
+          <span class="profesional">{{ comentario.profesional }}</span>
+        </div>
+      </div>
+    </div>
 
-<div *ngFor="let comentario of datos">
-    {{comentario.nombre}}
-    {{comentario.comentario}}
-    {{comentario.fecha}}
-    {{comentario.valoracion}}
-    {{comentario.profesional}}
+    <div class="comentarios-btn">
+        <button *ngIf="Usuario.estaLogueado" [routerLink]="['/crear-comentario']">Crear comentario</button>
 
-    <br>
-</div>
+    </div>
+</section>
+

@@ -1,0 +1,56 @@
+@import '../../styles/mixin.scss';
+@import '../../styles/variable.scss';
+
+#login-container{
+    background-color: #59abb3;
+    height: 67.8vh;
+    @include flex(center, center, column);
+    hr{
+        border: 2px solid #ffa516;
+        border-radius: 5px;
+        opacity: 1;
+        width: 25%;
+    }
+
+    
+.login-form {
+    width: 50%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .login-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .login-form input[type="email"],
+  .login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .login-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #59abb3;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-form button[type="submit"]:hover {
+    background-color: #499aa2;
+  }
+  
+}

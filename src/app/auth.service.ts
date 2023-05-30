@@ -70,6 +70,8 @@ export class AuthService {
 
   login(usuarioData: string, contraseñaData: string) {
     this.datos.getUsuarios().subscribe((usuarios) => {
+      let usuarioEncontrado = false;
+  
       for (let usuario of usuarios) {
         if (usuario.email == usuarioData && usuario.contraseña == contraseñaData) {
           this.estaLogueado = true;
@@ -77,19 +79,30 @@ export class AuthService {
           this.emailUser = usuario.email;
           this.rol = usuario.rol;
           this.nombre = usuario.nombre;
-
+  
           console.log(this.rol, this.nombre, this.emailUser, this.estaLogueado, this.logueado);
+  
           if (this.rol == 'paciente') {
             this.obtenerCitasPaciente();
           } else if (this.rol == 'profesional') {
             this.obtenerCitasProfesional();
           }
-
+  
           this.saveAuthState(); // Guardar estado de autenticación
+          usuarioEncontrado = true;
+          break; // Salir del bucle una vez que se ha encontrado el usuario
         }
+      }
+  
+      if (usuarioEncontrado) {
+        console.log(this.rol, this.nombre, this.emailUser, this.estaLogueado, this.logueado);
+        this.router.navigate(['usuario-privado']);
+      } else {
+        alert("Usuario o contraseña incorrectos");
       }
     });
   }
+  
   
   // editarUsuario(email: string, contraseña: string){
   //     // cambiar la contraseña a un usuario ya creado mediante el email

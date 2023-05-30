@@ -44,7 +44,7 @@ export class CrearPacienteComponent {
 
     crearProfesional(){
       this.rol = "profesional";
-      this.Datos.crearProfeisonal(this.rol, this.nombre, this.apellidos, this.telefono, this.email, this.direccion, this.dni, this.cuentaBancaria, this.salario, this.horario, this.cargo, this.contrasena, this.getFechactual());
+      this.Datos.crearProfesional(this.rol, this.nombre, this.apellidos, this.telefono, this.email, this.direccion, this.dni, this.cuentaBancaria, this.salario, this.horario, this.cargo, this.contrasena, this.getFechactual());
       this.router.navigate(['/usuario-privado']);
 }
 

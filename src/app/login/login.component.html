@@ -1,11 +1,15 @@
-<div>
-    <form>
-    <label>Usuario</label>
-    <input [(ngModel)]="username" [ngModelOptions]="{standalone:true}" type="email"  placeholder="Enter your email" />
+<section id="login-container">
+    <img src="../../assets/images/dentist_logo_no_text.png">
+    <hr>
+    <h1>Acceso de usuario</h1>
     <br>
-    <label>Contraseña</label>
-    <input [(ngModel)]="password" [ngModelOptions]="{standalone:true}" type="password" placeholder="Enter your password" />
-    <br>
-    <input type="submit" (click)="loginUsuario()" value="Acceder"/>
-</form> 
-</div>
+    <form class="login-form">
+      <label>Usuario</label>
+      <input [(ngModel)]="username" [ngModelOptions]="{standalone:true}" type="email" placeholder="Enter your email" />
+      <br>
+      <label>Contraseña</label>
+      <input [(ngModel)]="password" [ngModelOptions]="{standalone:true}" type="password" placeholder="Enter your password" />
+      <br>
+      <button type="submit" (click)="loginUsuario()">Acceder</button>
+    </form>
+</section>

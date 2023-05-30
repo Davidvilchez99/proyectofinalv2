@@ -66,7 +66,7 @@ export class DatosService {
     });
   }
 
-  crearProfeisonal(rol:string, nombre:string, apellidos:string, telefono:string, email:string, direccion:string, dni:string, cuentaBancaria:string, salario:number, horario:string, cargo:string, contrasena:string, fecha:string){
+  crearProfesional(rol:string, nombre:string, apellidos:string, telefono:string, email:string, direccion:string, dni:string, cuentaBancaria:string, salario:number, horario:string, cargo:string, contrasena:string, fecha:string){
       setDoc(doc(this.db, "usuarios", dni), {
         rol: rol,
         nombre: nombre,

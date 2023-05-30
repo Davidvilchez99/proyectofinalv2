@@ -18,8 +18,6 @@ export class LoginComponent {
 
   loginUsuario() {
     this.Usuario.login(this.username, this.password);
-
-    this.router.navigate(['usuario-privado']);
   }
 
 

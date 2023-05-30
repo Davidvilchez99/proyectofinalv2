@@ -9,7 +9,7 @@ main {
     grid-row: 1/ 2;
     grid-column: 1 / -1;
     height: 80vh;
-
+    
     #carouselExampleControls {
         height: 100vh;
     }
@@ -32,6 +32,56 @@ main {
             background-image: url('../../assets/images/Couple_large.jpg');
         }
     }
+
+    #div-niña-pecas{
+        width: 30vw;
+        height: 30vh;
+        color: white;
+        margin: 10%;
+        font-size: 1.5em;
+        hr{
+            border: 2px solid #59abb3;
+            border-radius: 5px;
+            opacity: 1;
+        }
+    }
+
+    #div-mujer{
+        width: 30vw;
+        height: 30vh;
+        color: white;
+        margin: 15%;
+        font-size: 5em;
+        opacity: 0;
+        animation: fadeIn 2s ease-in-out forwards;
+
+          @keyframes fadeIn {
+            0% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+    }
+
+    #div-pareja{
+        width: 30vw;
+        height: 30vh;
+        color: #0c354a;
+        margin: 10%;
+        position: absolute;
+        left: 55%;
+        font-size: 1.5em;
+
+
+        hr{
+            border: 2px solid #59abb3;
+            border-radius: 5px;
+            opacity: 1;
+        }
+    }
+    
 }
 
 #cuadrados-principales {
@@ -39,7 +89,7 @@ main {
     grid-column: 1 / -1;
     color: white;
     @include flex(center, center, row);
-    width: 97vw;
+    width: 100%;
     position: absolute;
     top: 70vh;
     text-align: center;
@@ -82,13 +132,18 @@ main {
     background-color: #dfeef0;
     padding-top: 20%;
     padding-bottom: 5%;
+    font-size: 1.2em;
 
     #welcome-father {
         width: 75vw;
         margin: auto;
+        hr{
+            border: 2px solid #59abb3;
+            border-radius: 5px;
+            opacity: 1;
+        }
 
         #welcome-son:nth-child(1) {
-            margin: 1%;
             width: 100%;
         }
 
@@ -101,7 +156,6 @@ main {
 
             #welcome-son2 {
                 width: 30%;
-                padding: 1%;
 
                 img {
                     width: 100%;
@@ -118,19 +172,45 @@ main {
     grid-row: 4/ 5;
     grid-column: 1 / -1;
     background-color: #dfeef0;
+    font-size: 2em;
 
 
-    #schedule-father {
-        padding-top: 5%;
-        padding-bottom: 5%;
-        background-color: #0c354a;
-        color: white;
+    .location-section {
+        padding: 80px 0;
         text-align: center;
-
-        p {
-            margin-bottom: 0;
-        }
-    }
+        background-color: #0c354a;
+        color: #dfeef0;
+      }
+      
+      .section-title {
+        font-size: 32px;
+        margin-bottom: 40px;
+      }
+      
+      .map-wrapper {
+        margin-bottom: 40px;
+      }
+      
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+      
+      .address-info {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      
+      .address-info h3 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      
+      .address-info p {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+      }
 
     .pico1 {
         border-left: 49.275vw solid transparent;
@@ -162,22 +242,27 @@ main {
     #welcome-father {
         width: 75vw;
         margin: auto;
+        font-size: 1.1em;
 
         #welcome-son:nth-child(1) {
             margin: 1%;
             width: 100%;
+            hr {
+                border: 2px solid #59abb3;
+                border-radius: 5px;
+                opacity: 1;
+            }
         }
 
         #welcome-son:nth-child(2) {
             @include flex(center, normal, row);
 
-            #welcome-son1 {
+            #welcome-son2 {
                 width: 70%;
+                padding: 1%;
             }
 
-            #welcome-son2 {
-                width: 30%;
-                padding: 1%;
+            #welcome-son1 {
 
                 img {
                     width: 100%;
@@ -191,8 +276,8 @@ main {
 
     .container {
         position: relative;
-        width: 400px;
-        height: 200px;
+        width: 600px;
+        // height: 200px;
         overflow: hidden;
     }
 
@@ -228,8 +313,7 @@ main {
 
     .instruction {
         position: absolute;
-        color: white;
-        font-size: 20px;
+        font-size: 27px;
         text-align: center;
         opacity: 1;
         transition: opacity 0.5s ease;
@@ -246,18 +330,22 @@ main {
 #coments {
     grid-row: 7/ 8;
     grid-column: 1 / -1;
-
+    font-size: 1.2em;
     text-align: center;
-    padding: 5%;
+    padding: 3%;
 
     background-color: #09405e;
     color: white;
+    div{
+        padding: 1%;
+    }
 }
 
 #contact {
     grid-row: 8/ 9;
     grid-column: 1 / -1;
     color: #0c354a;
+    font-size: 1.2em;
     // @include flex(center, center, column);
     text-align: center;
     background-image: url('../../assets/images/AdobeStock_61119644_xlarge.jpg');
@@ -267,9 +355,22 @@ main {
     padding: 5%;
     background-attachment: fixed;
 
-    //     .pico2 {
-    //         border-left: 49.48vw solid #0c354a;
-    //         border-right: 49.47vw solid #0c354a;
-    //         border-top: 100px solid transparent;
-    //   }
+    input, textarea{
+        width: 25%;
+        border: 1px solid #0c354a;
+        border-radius: 5px;
+    }
+    button{
+        width: 25%;
+        border: 1px solid #0c354a;
+        border-radius: 5px;
+        background-color: #09405e;
+        color: #e5e5e5;
+        
+    }
+    button:hover{
+        background-color: #e5e5e5;
+        color: #09405e;
+    }
+
 }
