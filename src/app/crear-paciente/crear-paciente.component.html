@@ -1,4 +1,5 @@
-<!-- <button [routerLink]="['/usuario-privado']">Volver</button> -->
+<div class="crear-usuario-form">
+<div>
 <h1>Crear paciente / profesional</h1>
 <select [(ngModel)]="tipo">
     <option value="paciente">Paciente</option>
@@ -30,7 +31,7 @@
     <label>Contraseña</label>
     <input [(ngModel)]="contrasena" [ngModelOptions]="{standalone:true}" type="password" placeholder="Enter your password" />
     <br>
-    <input type="submit" (click)="crearPaciente()" value="Crear"/>
+    <button (click)="crearProfesional()">Crear</button>
 </form>
 <form *ngIf="tipo == 'profesional'">
     <label>Nombre</label>
@@ -66,5 +67,7 @@
     <label>Contraseña</label>
     <input [(ngModel)]="contrasena" [ngModelOptions]="{standalone:true}" type="password" placeholder="Enter your password" />
     <br>
-    <input type="submit" (click)="crearProfesional()" value="Crear"/>
+    <button (click)="crearProfesional()">Crear</button>
 </form>
+</div>
+</div>

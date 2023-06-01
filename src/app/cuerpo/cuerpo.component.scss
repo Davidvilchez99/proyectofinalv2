@@ -338,6 +338,10 @@ main {
     color: white;
     div{
         padding: 1%;
+        p{
+            word-wrap: break-word;
+            width: 87vw;
+        }
     }
 }
 
@@ -369,8 +373,9 @@ main {
         
     }
     button:hover{
-        background-color: #e5e5e5;
-        color: #09405e;
+        transition: ease 0.5s all;
+        // background-color: #e5e5e5;
+        color: #ffa516;
     }
 
 }

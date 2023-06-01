@@ -1,8 +1,10 @@
-<button [routerLink]="['/usuario-privado']">Volver</button>
+<div class="crear-cita-form">
+<div>
+    <h2>Crear cita</h2>
 <form>
     <label>Paciente</label>
-    <select [(ngModel)]="dni_paciente" [ngModelOptions]="{standalone:true}">
-        <option *ngFor="let paciente of pacientes" value="{{paciente.dni}}">
+    <select [(ngModel)]="paciente" [ngModelOptions]="{standalone:true}">
+        <option *ngFor="let paciente of pacientes" value="{{paciente.dni}}-{{paciente.nombre}} {{paciente.apellidos}}">
             {{paciente.dni}}-{{paciente.nombre}} {{paciente.apellidos}}
         </option>
     </select>
@@ -11,8 +13,8 @@
     <input [(ngModel)]="fecha" [ngModelOptions]="{standalone:true}" type="date"  placeholder="Enter the date" />
     <br>
     <label>Profesional</label>
-    <select [(ngModel)]="dni_profesional" [ngModelOptions]="{standalone:true}">
-        <option *ngFor="let profesional of profesionales" value="{{profesional.dni}}">
+    <select [(ngModel)]="profesional" [ngModelOptions]="{standalone:true}">
+        <option *ngFor="let profesional of profesionales" value="{{profesional.dni}}-{{profesional.nombre}} {{profesional.apellidos}}">
             {{profesional.dni}}-{{profesional.nombre}} {{profesional.apellidos}}
         </option>
     </select>
@@ -30,6 +32,7 @@
         <option value="cancelada">Cancelada</option>
     </select>
     <br>
-    <input type="submit" (click)="crearCita()" value="Crear"/>
-
+    <button (click)="crearCita()">Crear</button>
 </form>
+</div>
+</div>

@@ -20,8 +20,8 @@ export class CrearCitaComponent {
   estado = "";
   precio = 0;
   descripcion = "";
-  dni_paciente = "";
-  dni_profesional = "";
+  paciente = "";
+  profesional = "";
       
     constructor(public datosService: DatosService, public Usuario : AuthService, public router: Router) { 
       datosService.getUsuarios().subscribe((usuarios) => {
@@ -49,19 +49,7 @@ export class CrearCitaComponent {
     
 
     crearCita() {
-      // console.log(this.fecha);
-      // console.log(this.estado);
-      // console.log(this.precio);
-      // console.log(this.descripcion);
-      // console.log(this.paciente);
-      // console.log(this.profesional);
-
-      this.datosService.crearCita(this.fecha, this.estado, this.precio, this.descripcion, this.dni_paciente, this.dni_profesional);
+      this.datosService.crearCita(this.fecha, this.estado, this.precio, this.descripcion, this.paciente, this.profesional);
       this.router.navigate(['/usuario-privado']);
-
-      // this.rol = "paciente";
-      // this.Usuario.crearUsuario(this.email, this.contrasena);
-      // this.Datos.crearPaciente(this.rol, this.nombre, this.apellidos, this.telefono, this.email, this.direccion, this.dni, this.presupuesto, this.contrasena, this.getFechactual());
-      // this.router.navigate(['/usuario-privado']);
     }
 }

@@ -1,36 +1,71 @@
 <section id="user-private">
 
 
-<h3>Bienvenido {{this.Usuario.emailUser}}</h3>
-<div *ngIf="this.Usuario.rol == 'administrativo'">
-    <p>Aministrativo</p>
-    <div id="botones"><button [routerLink]="['/crear-paciente']">Crear paciente</button>
-    <button [routerLink]="['/crear-cita']">Crear cita</button></div>
-    <p *ngFor="let cita of this.Usuario.citas">
-        {{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.dni_profesional }}
-    </p>
-    <hr>
-    <div id="usuarios">
-        <p *ngFor="let usuario of this.usuarios">
-            {{ usuario.nombre }} - {{ usuario.apellidos }}- {{ usuario.dni }}- {{ usuario.rol }}
-            <button [routerLink]="['/editar-usuario',usuario.dni]">Editar</button>
+    <div *ngIf="this.Usuario.rol == 'administrativo'">
+        <div id="div-info-btn">
+            <h3>Bienvenido {{this.Usuario.emailUser}}</h3>
+            <div id="botones"><button [routerLink]="['/crear-paciente']">Crear paciente</button>
+                <button [routerLink]="['/crear-cita']">Crear cita</button>
+            </div>
+        </div>
+        <!-- <p *ngFor="let cita of this.Usuario.citas">
+            {{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.dni_profesional }}
+        </p> -->
+        <hr>
+        <div id="container-private-user">
+            <div id="users-list">
+
+            <h3>Lista de usuarios</h3>
+            <div id="filtrado"> <label>Filtrar por nombre, apellidos o dni: </label><input type="text"
+                    [(ngModel)]="filterText" (ngModelChange)="filterUsuarios()"
+                    placeholder="Filter by name, last name, or DNI">
+            </div>
+            <div id="usuarios">
+                <div *ngFor="let usuario of filteredUsuarios">
+                    <p>{{ usuario.nombre }}  {{ usuario.apellidos }}<br> {{ usuario.dni }} - {{ usuario.rol }}</p>
+                    <div>
+                        <button [routerLink]="['/editar-usuario',usuario.dni]">Editar</button>
+                        <button (click)="verCitasUsuario( usuario.dni, usuario.nombre, usuario.apellidos, usuario.rol)">Ver citas</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="user-cite">
+            <h3 id="user-cite-h3">Citas del usuario</h3>
+            <div id="citas">
+                <div *ngFor="let cita of citasUsuarioAdministrador">
+                    <p>{{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.nombre_profesional }}--{{cita.nombre_paciente}}</p>
+                    <div>
+                        <button [routerLink]="['/cita-usuario', cita.id]">Editar</button>
+                        <button (click)="borrarCita(cita.id )">Borrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <div *ngIf="this.Usuario.rol == 'profesional'">
+        <p>Profesional</p>
+        <button [routerLink]="['/crear-cita']">Crear cita</button>
+
+        <hr>
+        <p *ngFor="let cita of this.Usuario.citas">
+            {{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.dni_profesional }}
         </p>
     </div>
-</div>
-
-<div *ngIf="this.Usuario.rol == 'profesional'">
-    <p>Profesional</p>
-    <button [routerLink]="['/crear-cita']">Crear cita</button>
-
-    <hr>
-    <p *ngFor="let cita of this.Usuario.citas">
-        {{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.dni_profesional }}
-    </p>
-</div>
-<div *ngIf="this.Usuario.rol == 'paciente'">
-    <p>paciente</p><hr>
-    <p *ngFor="let cita of this.Usuario.citas">
-        {{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.dni_profesional }}
-    </p>
-</div>
+    <div *ngIf="this.Usuario.rol == 'paciente'">
+        <p>paciente</p>
+        <hr>
+        <p *ngFor="let cita of this.Usuario.citas">
+            {{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.dni_profesional }}
+        </p>
+    </div>
 </section>
+
+<!-- [routerLink]="['/citas-usuarios',usuario.dni]" -->

@@ -1,3 +1,5 @@
+<div class="crear-comentario-form">
+<div>
 <h2>Crear comentario</h2>
 <form>
     <label>Nombre</label>
@@ -11,8 +13,10 @@
     <br>
     <label>Profesional</label>
     <select [(ngModel)]="comentario.profesional" [ngModelOptions]="{standalone:true}">
-        <option *ngFor="let profesional of profesionales" value="{{profesional.nombre}}">{{profesional.nombre}}</option>
+        <option *ngFor="let profesional of profesionales" value="{{profesional.nombre}} {{profesional.apellidos}}">{{profesional.nombre}} {{profesional.apellidos}}</option>
     </select>
     <br>
     <button (click)="crearComentario()">Crear comentario</button>
 </form>
+</div>
+</div>

@@ -18,6 +18,7 @@ export class AuthService {
   emailUser: string = "";
   dni: string = "";
   nombre: string = "";
+  apellido: string = "";
   estaLogueado: boolean = false;
   logueado: boolean = false;
   rol : string = "";
@@ -40,6 +41,7 @@ export class AuthService {
         logueado,
         rol,
         nombre,
+        apellido,
       } = JSON.parse(authState);
       this.userId = userId;
       this.emailUser = emailUser;
@@ -47,6 +49,7 @@ export class AuthService {
       this.logueado = logueado;
       this.rol = rol;
       this.nombre = nombre;
+      this.apellido = apellido;
 
       if (rol === 'paciente') {
         this.obtenerCitasPaciente();
@@ -64,6 +67,7 @@ export class AuthService {
       logueado: this.logueado,
       rol: this.rol,
       nombre: this.nombre,
+      apellido: this.apellido,
     });
     localStorage.setItem('authState', authState);
   }
@@ -79,8 +83,8 @@ export class AuthService {
           this.emailUser = usuario.email;
           this.rol = usuario.rol;
           this.nombre = usuario.nombre;
+          this.apellido = usuario.apellidos;
   
-          console.log(this.rol, this.nombre, this.emailUser, this.estaLogueado, this.logueado);
   
           if (this.rol == 'paciente') {
             this.obtenerCitasPaciente();
@@ -95,7 +99,7 @@ export class AuthService {
       }
   
       if (usuarioEncontrado) {
-        console.log(this.rol, this.nombre, this.emailUser, this.estaLogueado, this.logueado);
+        console.log(this.rol, this.nombre, this.apellido , this.emailUser, this.estaLogueado, this.logueado);
         this.router.navigate(['usuario-privado']);
       } else {
         alert("Usuario o contraseña incorrectos");
@@ -187,12 +191,12 @@ export class AuthService {
 //       });
 //     }
 
-    comprobarSiEstaLogueado() {
-      // if (this.estaLogueado) {
+    // comprobarSiEstaLogueado() {
+    //   // if (this.estaLogueado) {
         
-      // }
-      console.log(this.estaLogueado, this.logueado, this.emailUser, this.rol, this.nombre);
-    }
+    //   // }
+    //   console.log(this.estaLogueado, this.logueado, this.emailUser, this.rol, this.nombre);
+    // }
     
 
     consultarRolUsuario() {
@@ -227,6 +231,18 @@ export class AuthService {
         }
         
       );
+    }
+
+    obtenerCitasUsuario(dni: string, rol: string): Observable<any[]> {
+      if (rol == "paciente") {
+        return this.datos.getCitasdePacientes(dni);
+      }else if (rol == "profesional") {
+        return this.datos.getCitasdeProfesionales(dni);
+      }
+      return new Observable<any[]>(observer => {
+        observer.next([]); // Puedes ajustar el valor por defecto según tus necesidades
+        observer.complete();
+      });
     }
 
     obtenerCitasProfesional (){

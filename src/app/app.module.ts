@@ -22,6 +22,7 @@ import { CrearPacienteComponent } from './crear-paciente/crear-paciente.componen
 import { CrearCitaComponent } from './crear-cita/crear-cita.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 import { CrearComentarioComponent } from './crear-comentario/crear-comentario.component';
+import { CitasUsuariosComponent } from './citas-usuarios/citas-usuarios.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { CrearComentarioComponent } from './crear-comentario/crear-comentario.co
     CrearPacienteComponent,
     CrearCitaComponent,
     EditarUsuarioComponent,
-    CrearComentarioComponent
+    CrearComentarioComponent,
+    CitasUsuariosComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,7 @@
-<form>
+<div class="editar-usuario-form">
+    <div>
+<h2>Editar usuario</h2>
+<form *ngIf="datosUsuario.rol == 'paciente'">
     <label>Nombre</label>
     <input [(ngModel)]="datosUsuario.nombre" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your name" />
     <br>
@@ -15,7 +18,7 @@
     <input [(ngModel)]="datosUsuario.email" [ngModelOptions]="{standalone:true}" type="email"  placeholder="Enter your email" />
     <br>
     <label>Dni</label>
-    <input [(ngModel)]="datosUsuario.dni" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your dni" />
+    <input disabled [(ngModel)]="datosUsuario.dni" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your dni" />
     <br>
     <label>Presupuesto</label>
     <input [(ngModel)]="datosUsuario.presupuesto" [ngModelOptions]="{standalone:true}" type="number" min="0"  placeholder="Enter your budget" />
@@ -24,12 +27,60 @@
     <input [(ngModel)]="datosUsuario.contrasena" [ngModelOptions]="{standalone:true}" type="password" placeholder="Enter your password" />
     <br>
     <label>Rol</label>
-    <select [(ngModel)]="datosUsuario.rol" [ngModelOptions]="{standalone:true}">
+    <select disabled [(ngModel)]="datosUsuario.rol" [ngModelOptions]="{standalone:true}">
         <option value="administrativo">Administrativo</option>
         <option value="profesional">Profesional</option>
         <option value="paciente">Paciente</option>
     </select>
     <br>
-    <input type="submit" (click)="editarUsuario()" value="Editar"/>
+    <button (click)="editarUsuario()" >Editar</button>
+    <button (click)="borrarUsuario()">Borrar</button>
+
 </form>
-<input type="submit" (click)="borrarUsuario()" value="Borrar"/>
+<form *ngIf="datosUsuario.rol == 'profesional'">
+    <label>Nombre</label>
+    <input [(ngModel)]="datosUsuario.nombre" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your name" />
+    <br>
+    <label>Apellidos</label>
+    <input [(ngModel)]="datosUsuario.apellidos" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your surname" />
+    <br>
+    <label>Dirección</label>
+    <input [(ngModel)]="datosUsuario.direccion" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your address" />
+    <br>
+    <label>Teléfono</label>
+    <input [(ngModel)]="datosUsuario.telefono" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your phone number" />
+    <br>
+    <label>Correo electrónico</label>
+    <input [(ngModel)]="datosUsuario.email" [ngModelOptions]="{standalone:true}" type="email"  placeholder="Enter your email" />
+    <br>
+    <label>Dni</label>
+    <input disabled [(ngModel)]="datosUsuario.dni" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your dni" />
+    <br>
+    <label>Contraseña</label>
+    <input [(ngModel)]="datosUsuario.contrasena" [ngModelOptions]="{standalone:true}" type="password" placeholder="Enter your password" />
+    <br>
+    <label>Rol</label>
+    <select disabled [(ngModel)]="datosUsuario.rol" [ngModelOptions]="{standalone:true}">
+        <option value="administrativo">Administrativo</option>
+        <option value="profesional">Profesional</option>
+        <option value="paciente">Paciente</option>
+    </select>
+    <br>
+    <label>Salario</label>
+    <input [(ngModel)]="datosUsuario.salario" [ngModelOptions]="{standalone:true}" type="number" min="0"  placeholder="Enter your salary" />
+    <br>
+    <label>Horario</label>
+    <input [(ngModel)]="datosUsuario.horario" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your schedule" />
+    <br>
+    <label>Cargo</label>
+    <input [(ngModel)]="datosUsuario.cargo" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your position" />
+    <br>
+    <label>Cuenta bancaria</label>
+    <input [(ngModel)]="datosUsuario.cuentaBancaria" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your bank account" />
+    <br>
+
+    <button (click)="editarUsuario()" >Editar</button>
+    <button (click)="borrarUsuario()">Borrar</button>
+</form>
+</div>
+</div>

@@ -12,7 +12,7 @@ import { CrearPacienteComponent } from './crear-paciente/crear-paciente.componen
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 
 import { CrearComentarioComponent } from './crear-comentario/crear-comentario.component';
-
+import { CitasUsuariosComponent } from './citas-usuarios/citas-usuarios.component';
 
 const routes: Routes = [
   {
@@ -54,6 +54,10 @@ const routes: Routes = [
   {
     path: 'crear-comentario',
     component: CrearComentarioComponent,
+  },
+  {
+    path: 'cita-usuario/:id',
+    component: CitasUsuariosComponent,
   }
 
 ];

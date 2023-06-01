@@ -43,7 +43,7 @@ export class CrearComentarioComponent {
       this.router.navigate(['/comentarios']);
   }
   ngOnInit() {
-    this.comentario.nombre = this.Usuario.nombre;
+    this.comentario.nombre = this.Usuario.nombre + " " + this.Usuario.apellido;
   }
 
 
