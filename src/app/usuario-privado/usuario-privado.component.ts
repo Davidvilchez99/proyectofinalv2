@@ -6,6 +6,7 @@ import { EventInput } from '@fullcalendar/core';
 import {CalendarControllerService} from '../calendar-controller.service';
 import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
+import { Calendar } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-usuario-privado',
@@ -43,12 +44,49 @@ export class UsuarioPrivadoComponent {
     });
   }
   ngOnInit() {
-    this.calendarOptions = this.calendarService.getCalendarOptions();
+    // this.calendarOptions = this.calendarService.getCalendarOptions();
+    
+  
     this.Usuario.obtenerCitasUsuario(this.Usuario.dni, this.Usuario.rol).subscribe((citas) => {
       this.citasUsuarioProfesional = citas;
       this.filteredCites = this.citasUsuarioProfesional;
-      console.log(this.citasUsuarioProfesional);
+      const calendarElement = document.getElementById('calendar');
+  if (calendarElement) {
+    console.log(calendarElement);
+
+    let calendar = new Calendar(calendarElement, {
+      plugins: [dayGridPlugin],
+      headerToolbar: {
+        left: 'prev,next',
+        center: 'title',
+        right: 'dayGridMonth'
+      },
+      initialView: 'dayGridMonth',
+      weekends: false,
+      eventClick(arg) {
+        const descripcion = arg.event.extendedProps["descripcion"];
+        alert(descripcion);
+      },
+      dayMaxEvents: true,
+    views: {
+      dayGrid: {
+        eventLimit: 3 // Especificar el límite de eventos antes de mostrar "+X More"
+      },
+    },
+      events: this.citasUsuarioProfesional.map((cita) => {
+        return {
+          title: cita.nombre_paciente,
+          date: cita.fecha+"T"+cita.hora,
+          color: cita.color,
+          descripcion: cita.descripcion
+        };
+      }),
     });
+    calendar.render();
+  }
+    });
+
+    
   }
 
   

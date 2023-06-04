@@ -25,17 +25,35 @@ export class CalendarControllerService {
   constructor() { 
   }
 
-  // getCitasUsuario(citas:any) {
-  //   for (let i = 0; i < citas.length; i++) {
-  //     console.log(citas[i]);
-
-  //     (this.calendarOptions.events as EventInput[]).push({
-  //       "title": citas[i].title,
-  //       "start": citas[i].fecha
-  //     });
-      
+  // getCitasUsuario(citas: any, rol: string) {
+  //   if (rol === 'paciente') {
+  //     this.calendarOptions.events = citas.map((cita: any) => {
+  //       return {
+  //         title: cita.nombre_profesional,
+  //         start: cita.fecha,
+  //         display: 'background',
+  //         color: '#ff9f89',
+  //         eventLimit: true,
+  //         eventLimitText: "More Events",
+  //       };
+  //     }) as EventInput[];
+  //   } else if (rol === 'profesional') {
+  //     this.calendarOptions.events = citas.map((cita: any) => {
+  //       const fechaHoraInicio = new Date(`${cita.fecha}T${cita.hora}`);
+  //       console.log(fechaHoraInicio);
+  //       return {
+  //         title: cita.nombre_paciente,
+  //         start: '2023-06-04T20:00:00',
+  //       end: '2023-02-05602:00:00',
+  //         display: 'background',
+  //         color: '#ff9f89',
+  //         eventLimit: true,
+  //         eventLimitText: "More Events",
+  //       };
+  //     }) as EventInput[];
+  //   }
   // }
-  // }
+  
   getCitasUsuario(citas: any, rol: string) {
     if (rol === 'paciente') {
       this.calendarOptions.events = citas.map((cita: any) => {
@@ -71,7 +89,7 @@ export class CalendarControllerService {
   
   
 
-  getCalendarOptions(): CalendarOptions {
-    return this.calendarOptions;
-  }
+  // getCalendarOptions(): CalendarOptions {
+  //   return this.calendarOptions;
+  // }
 }

@@ -202,7 +202,8 @@ export class DatosService {
       dni_paciente: cita.dni_paciente,
       nombre_paciente: cita.nombre_paciente,
       dni_profesional: cita.dni_profesional,
-      nombre_profesional: cita.nombre_profesional
+      nombre_profesional: cita.nombre_profesional,
+      hora: cita.hora
     });
     this.router.navigate(['usuario-privado']);
   }

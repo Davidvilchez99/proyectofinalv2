@@ -20,7 +20,7 @@ export class CitasUsuariosComponent {
     estado: '',
     precio: 0,
     descripcion: '',
-    horaIncicio: ''
+    hora: ''
   };
   id: any = null;
   usuarios: any[] = [];
