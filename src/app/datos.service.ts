@@ -97,7 +97,7 @@ export class DatosService {
     });
   }
 
-  crearCita(fecha: string, estado: string, precio: number, descripcion: string, paciente: string, profesional: string) {
+  crearCita(fecha: string, estado: string, precio: number, descripcion: string, paciente: string, profesional: string, hora: string) {
     let nombrePaciente = "";
     let dniPaciente = "";
     let nombreProfesional = "";
@@ -116,7 +116,8 @@ export class DatosService {
       dni_paciente: dniPaciente,
       nombre_paciente: nombrePaciente,
       dni_profesional: dniProfesional,
-      nombre_profesional: nombreProfesional
+      nombre_profesional: nombreProfesional,
+      hora: hora
     });
   }
 

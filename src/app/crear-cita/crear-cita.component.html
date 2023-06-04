@@ -11,6 +11,8 @@
     <br>
     <label>Fecha</label>
     <input [(ngModel)]="fecha" [ngModelOptions]="{standalone:true}" type="date"  placeholder="Enter the date" />
+    <label for="horaInicio">Hora de inicio:</label>
+    <input type="time" [(ngModel)]="horaInicio" [ngModelOptions]="{standalone:true}" name="horaInicio">
     <br>
     <label>Profesional</label>
     <select [(ngModel)]="profesional" [ngModelOptions]="{standalone:true}">

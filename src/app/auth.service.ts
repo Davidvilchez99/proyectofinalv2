@@ -6,6 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { DatosService } from './datos.service';
 import { Router } from '@angular/router';
+import { CalendarControllerService } from './calendar-controller.service';
 
 
 
@@ -27,7 +28,7 @@ export class AuthService {
   // private originalAuth: Auth;
 
   
-  constructor(public firestore: Firestore, public datos: DatosService, public router: Router) {
+  constructor(public firestore: Firestore, public datos: DatosService, public router: Router, public calendarService: CalendarControllerService) {
     this.restoreAuthState();
   }
 
@@ -42,6 +43,7 @@ export class AuthService {
         rol,
         nombre,
         apellido,
+        dni
       } = JSON.parse(authState);
       this.userId = userId;
       this.emailUser = emailUser;
@@ -50,6 +52,7 @@ export class AuthService {
       this.rol = rol;
       this.nombre = nombre;
       this.apellido = apellido;
+      this.dni = dni;
 
       if (rol === 'paciente') {
         this.obtenerCitasPaciente();
@@ -68,6 +71,7 @@ export class AuthService {
       rol: this.rol,
       nombre: this.nombre,
       apellido: this.apellido,
+      dni: this.dni
     });
     localStorage.setItem('authState', authState);
   }
@@ -84,6 +88,7 @@ export class AuthService {
           this.rol = usuario.rol;
           this.nombre = usuario.nombre;
           this.apellido = usuario.apellidos;
+          this.dni = usuario.dni;
   
   
           if (this.rol == 'paciente') {
@@ -99,105 +104,14 @@ export class AuthService {
       }
   
       if (usuarioEncontrado) {
-        console.log(this.rol, this.nombre, this.apellido , this.emailUser, this.estaLogueado, this.logueado);
+        console.log(this.rol, this.nombre, this.apellido , this.emailUser, this.estaLogueado, this.logueado, this.dni);
         this.router.navigate(['usuario-privado']);
       } else {
         alert("Usuario o contraseña incorrectos");
       }
     });
   }
-  
-  
-  // editarUsuario(email: string, contraseña: string){
-  //     // cambiar la contraseña a un usuario ya creado mediante el email
-  //     signInWithEmailAndPassword(this.auth, email, contraseña)
-  //     .then((userCredential) => {
-  //       // Actualiza la contraseña
-  //       updatePassword(userCredential.user, contraseña).then(() => {
-  //         // Actualización de contraseña exitosa
-  //         console.log("contraseña actualizada");
-  //         // Restablece la instancia original de autenticación
-  //         this.auth = this.originalAuth;
-  //         // ...
-  //       }).catch((error) => {
-  //         // Error al actualizar la contraseña
-  //         // ...
-  //       });
-  //     }
-  //     );
-  // }
 
-
-  // login(usuario: string, contraseña: string) {
-  //   signInWithEmailAndPassword(this.auth, usuario, contraseña)
-  //     .then((userCredential) => {
-  //       // Inicio de sesión exitoso
-  //       const user = userCredential.user;
-  //       this.userId = user.uid;
-  //       this.emailUser = user.email || "";
-  //       this.estaLogueado = true;
-  //       this.logueado = true;
-  //       // consultar rol de usuario en base de datos usuarios
-  //       this.consultarRolUsuario();
-  //       // this.obtenerCitasPaciente();
-  //       // this.obtenerCitasProfesional();
-  //       // ...
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       // ...
-  //     });
-  // }
-
-    // crearUsuario(usuario: string, contraseña: string) {
-    //   createUserWithEmailAndPassword(this.auth, usuario, contraseña)
-    //     .then((userCredential) => {
-    //       // El usuario se creó correctamente
-    //       console.log("usuario creado");
-    //       // Restablece la instancia original de autenticación
-    //       this.auth = this.originalAuth;
-    //       // ...
-    //     })
-    //     .catch((error) => {
-    //       const errorCode = error.code;
-    //       const errorMessage = error.message;
-    //       // ...
-    //     });
-    // }
-  
-
-//     comprobarSiEstaLogueado(auth: any) {
-//       onAuthStateChanged(auth, (user: any) => {
-//         if (user) {
-//           const userId = user.uid;
-//           const emailUser = user.email;
-    
-//           if (!this.estaLogueado) {
-//             // Actualiza los datos del usuario solo si no se ha iniciado sesión anteriormente
-//             this.userId = userId;
-//             this.emailUser = emailUser;
-//             this.estaLogueado = true;
-//             // consultar rol de usuario en base de datos usuarios
-//             this.consultarRolUsuario();
-//             // this.obtenerCitasPaciente();
-//             // this.obtenerCitasProfesional();          
-// }
-//         } else {
-//           this.userId = "";
-//           this.emailUser = "";
-//           this.estaLogueado = false;
-//         }
-//       });
-//     }
-
-    // comprobarSiEstaLogueado() {
-    //   // if (this.estaLogueado) {
-        
-    //   // }
-    //   console.log(this.estaLogueado, this.logueado, this.emailUser, this.rol, this.nombre);
-    // }
-    
 
     consultarRolUsuario() {
       // consultar rol de usuario en base de datos usuarios
@@ -227,6 +141,9 @@ export class AuthService {
 
         this.datos.getCitasdePacientes(this.dni).subscribe((citas) => {
           this.citas = citas;
+
+          this.calendarService.getCitasUsuario(this.citas, this.rol);
+
       });
         }
         
@@ -255,6 +172,8 @@ export class AuthService {
         this.datos.getCitasdeProfesionales(this.dni).subscribe((citas) => {
           this.citas = citas;
           console.log(this.citas);
+          this.calendarService.getCitasUsuario(this.citas, this.rol);
+
       });
         }
         
@@ -270,6 +189,7 @@ export class AuthService {
       this.emailUser = '';
       this.rol = '';
       this.nombre = '';
+      this.dni = '';
       this.citas = [];
       localStorage.removeItem('authState'); // Eliminar estado de autenticación almacenado
       this.router.navigate(['']);

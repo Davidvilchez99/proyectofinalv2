@@ -23,6 +23,8 @@ import { CrearCitaComponent } from './crear-cita/crear-cita.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 import { CrearComentarioComponent } from './crear-comentario/crear-comentario.component';
 import { CitasUsuariosComponent } from './citas-usuarios/citas-usuarios.component';
+import { CommonModule } from '@angular/common';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 
 @NgModule({
@@ -38,7 +40,7 @@ import { CitasUsuariosComponent } from './citas-usuarios/citas-usuarios.componen
     CrearCitaComponent,
     EditarUsuarioComponent,
     CrearComentarioComponent,
-    CitasUsuariosComponent
+    CitasUsuariosComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,9 @@ import { CitasUsuariosComponent } from './citas-usuarios/citas-usuarios.componen
     provideFirestore(() => getFirestore()),
     provideDatabase(() => getDatabase()),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CommonModule,
+    FullCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

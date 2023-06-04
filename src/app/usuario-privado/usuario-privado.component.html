@@ -3,7 +3,7 @@
 
     <div *ngIf="this.Usuario.rol == 'administrativo'">
         <div id="div-info-btn">
-            <h3>Bienvenido {{this.Usuario.emailUser}}</h3>
+            <h3>Bienvenido {{this.Usuario.nombre}} {{this.Usuario.apellido}}</h3>
             <div id="botones"><button [routerLink]="['/crear-paciente']">Crear paciente</button>
                 <button [routerLink]="['/crear-cita']">Crear cita</button>
             </div>
@@ -36,7 +36,7 @@
                 <div *ngFor="let cita of citasUsuarioAdministrador">
                     <p>{{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.nombre_profesional }}--{{cita.nombre_paciente}}</p>
                     <div>
-                        <button [routerLink]="['/cita-usuario', cita.id]">Editar</button>
+                        <button [routerLink]="['/cita-usuario', cita.id, 'administrador']">Editar</button>
                         <button (click)="borrarCita(cita.id )">Borrar</button>
                     </div>
                 </div>
@@ -51,21 +51,64 @@
 
 
     <div *ngIf="this.Usuario.rol == 'profesional'">
-        <p>Profesional</p>
-        <button [routerLink]="['/crear-cita']">Crear cita</button>
-
+        <div id="div-info-btn">
+            <h3>Bienvenido {{this.Usuario.nombre}} {{this.Usuario.apellido}}</h3>
+                <div id="botones"><button [routerLink]="['/crear-cita']">Crear cita</button></div>
+        </div>
         <hr>
-        <p *ngFor="let cita of this.Usuario.citas">
-            {{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.dni_profesional }}
-        </p>
+        <div id="container-private-user">
+            <div id="users-list">
+
+            <h3>Lista citas</h3>
+            <div id="filtrado"> <label>Filtrar por nombre, apellidos o dni: </label><input type="text"
+                    [(ngModel)]="filterCitesText" (ngModelChange)="filterCites()"
+                    placeholder="Filter by name, last name, or DNI">
+            </div>
+            <div id="usuarios">
+                <div *ngFor="let cita of filteredCites">
+                    <p>{{ cita.nombre_paciente }} {{ cita.dni_paciente }} <br> {{ cita.fecha }} - {{cita.hora}}</p>
+                    <div>
+                        <button [routerLink]="['/cita-usuario',cita.id, 'profesional']">Editar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="calendar">
+            <full-calendar [options]="calendarOptions"></full-calendar>
+        </div>
+        </div>
     </div>
     <div *ngIf="this.Usuario.rol == 'paciente'">
+        <div id="div-info-btn">
+            <h3>Bienvenido {{this.Usuario.nombre}} {{this.Usuario.apellido}}</h3>
+        </div>
+        <hr>
+        <div id="container-private-user">
+            <div id="users-list">
+
+            <h3>Lista citas</h3>
+            <div id="filtrado"> <label>Filtrar por nombre, apellidos o dni: </label><input type="text"
+                    [(ngModel)]="filterCitesText" (ngModelChange)="filterCites()"
+                    placeholder="Filter by name, last name, or DNI">
+            </div>
+            <div id="usuarios">
+                <div *ngFor="let cita of filteredCites">
+                    <p>{{ cita.nombre_profesional }} {{ cita.dni_profesional }} <br> {{ cita.fecha }} - {{cita.hora}}</p>
+                </div>
+            </div>
+        </div>
+        <div id="calendar">
+            <full-calendar [options]="calendarOptions"></full-calendar>
+        </div>
+        </div>
+    </div>
+
+    <!-- <div *ngIf="this.Usuario.rol == 'paciente'">
         <p>paciente</p>
         <hr>
         <p *ngFor="let cita of this.Usuario.citas">
             {{ cita.fecha }} - {{ cita.estado }}- {{ cita.precio }}- {{ cita.descripcion }}- {{ cita.dni_profesional }}
         </p>
-    </div>
+    </div> -->
 </section>
 
-<!-- [routerLink]="['/citas-usuarios',usuario.dni]" -->

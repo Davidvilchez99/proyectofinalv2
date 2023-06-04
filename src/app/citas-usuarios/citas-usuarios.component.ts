@@ -20,9 +20,11 @@ export class CitasUsuariosComponent {
     estado: '',
     precio: 0,
     descripcion: '',
+    horaIncicio: ''
   };
   id: any = null;
   usuarios: any[] = [];
+  rol : any = null;
 
   pacientes: any[] = [];
   profesionales : any[] = [];
@@ -38,6 +40,7 @@ export class CitasUsuariosComponent {
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
+      this.rol = params.get('rol');
       this.datosService.getCitaUsuario(this.id).then((citaUsuario: any) => {
         for (let index = 0; index < citaUsuario.length; index++) {
           if (citaUsuario[index].id == this.id) {

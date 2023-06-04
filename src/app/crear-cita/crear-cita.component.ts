@@ -22,6 +22,7 @@ export class CrearCitaComponent {
   descripcion = "";
   paciente = "";
   profesional = "";
+  horaInicio = "";
       
     constructor(public datosService: DatosService, public Usuario : AuthService, public router: Router) { 
       datosService.getUsuarios().subscribe((usuarios) => {
@@ -49,7 +50,7 @@ export class CrearCitaComponent {
     
 
     crearCita() {
-      this.datosService.crearCita(this.fecha, this.estado, this.precio, this.descripcion, this.paciente, this.profesional);
+      this.datosService.crearCita(this.fecha, this.estado, this.precio, this.descripcion, this.paciente, this.profesional, this.horaInicio);
       this.router.navigate(['/usuario-privado']);
     }
 }

@@ -7,7 +7,7 @@
             <ul>
                 <li [routerLink]="['']">Home</li>
                 <li *ngIf="!this.Usuario.estaLogueado"  [routerLink]="['/login']">Login</li>
-                <li (click)="cerrarSesion()" [routerLink]="['']">Salir
+                <li *ngIf="this.Usuario.estaLogueado" (click)="cerrarSesion()" [routerLink]="['']">Salir
                     ({{this.Usuario.emailUser}})</li>
                 <li [routerLink]="['/comentarios']">Coments</li>
                 <li id="scrollToTopButton" (click)="scrollToTop()">&#8593; Top</li>

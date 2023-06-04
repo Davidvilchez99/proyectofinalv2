@@ -3,7 +3,7 @@
 
 #login-container{
     background-color: #59abb3;
-    height: 67.8vh;
+    padding: 5%;
     @include flex(center, center, column);
     hr{
         border: 2px solid #ffa516;
