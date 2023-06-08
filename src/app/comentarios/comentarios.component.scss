@@ -132,3 +132,13 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  #coments {
+    text-align: center;
+    height: 100vh;
+    .comentarios-container{
+      width: 80%;
+    }
+  }
+}

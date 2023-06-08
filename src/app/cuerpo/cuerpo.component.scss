@@ -69,7 +69,7 @@ main {
         width: 30vw;
         height: 30vh;
         color: #0c354a;
-        margin: 10%;
+        margin: 5%;
         position: absolute;
         left: 55%;
         font-size: 1.5em;
@@ -94,14 +94,17 @@ main {
     top: 70vh;
     text-align: center;
 
+    .cuadrados-padres{
+        @include flex(center, center, row);
+
     div {
         height: 40vh;
         padding: 1%;
-        width: 20%;
         padding: auto;
+        width: 20vw;
 
         img {
-            width: 40%;
+            width: 5vw;
         }
     }
 
@@ -113,15 +116,17 @@ main {
         background-color: #499aa2;
     }
 
-    div:nth-child(1) {
+    .cuadrado-hijo-1 {
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
     }
 
-    div:nth-child(4) {
+    .cuadrado-hijo-4 {
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
     }
+
+}
 
 }
 
@@ -364,6 +369,9 @@ main {
         border: 1px solid #0c354a;
         border-radius: 5px;
     }
+    textarea{
+        min-height: 20vh;
+    }
     button{
         width: 25%;
         border: 1px solid #0c354a;
@@ -376,6 +384,132 @@ main {
         transition: ease 0.5s all;
         // background-color: #e5e5e5;
         color: #ffa516;
+    }
+
+}
+
+// media queries
+
+@media (max-width: 1400px) {
+    #cuadrados-principales{
+        .cuadrados-padres{
+            div{
+                height: 25vh;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 768px) {
+    main{
+        width: 100vw;
+    }
+    #presentacion{
+        height: 50vh;
+        width: 100vw;
+        .carousel-item{
+            height: 50vh;
+            div{
+                font-size: 0.8em !important;
+                width: 40vw;
+                h2, h4{
+                    font-size: 1.5em !important;
+                }
+            }
+            #div-pareja, #div-niña-pecas{
+                margin: 4%;
+                width: 40vw;
+            }
+        }
+        #carouselExampleControls{
+            height: 50vh;
+        }
+    }
+
+    #cuadrados-principales{
+        flex-direction: column;
+        position: initial;
+        width: 100vw;
+        .cuadrados-padres{
+            div{
+                width: 50vw;
+                border-radius: 0px;
+                padding: 5%;
+                font-size: 0.9em !important;
+                h3{
+                    font-size: 1em !important;
+                }
+                img{
+                    width: 30%;
+                }
+            }
+            .cuadrado-hijo-1, .cuadrado-hijo-4{
+                border-top-left-radius: 0px;
+                border-bottom-left-radius: 0px;
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
+            }
+        }
+        .cuadrados-padres:nth-child(1){
+            flex-direction: row-reverse;
+        }
+    }
+
+    #welcome{
+        width: 100vw;
+        font-size: 1em;
+        padding-top : 2%;
+
+        #welcome-son{
+            flex-direction: column !important;
+        }
+        #welcome-son1{
+            width: 100% !important;
+        }
+        #welcome-son2{
+            width: 100% !important;
+        }
+    }
+    #schedule{
+        width: 100vw;
+
+        #map{
+            iframe{
+                width: 100%;
+            }
+        }
+    }
+    #dientes-seccion{
+        width: 100vw;
+        font-size: 1em;
+        #welcome-son{
+            flex-direction: column !important;
+            
+        }
+        #welcome-son1{
+            height: 40vh;
+            width: 75vw;
+        }
+        #welcome-son2{
+            width: 100% !important;
+        }
+    }
+    #coments{
+        width: 100vw;
+    }
+    #contact{
+        width: 100vw;
+        
+        form {
+            textarea, input{
+                width: 60vw;
+            }
+
+            button{
+                width: 60vw;
+            }
+        }
     }
 
 }

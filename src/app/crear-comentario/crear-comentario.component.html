@@ -3,18 +3,20 @@
 <h2>Crear comentario</h2>
 <form>
     <label>Nombre</label>
-    <input type="text" name="nombre" readonly [(ngModel)]="comentario.nombre" />
-    <br>
-    <label>Comentario</label>
-    <input type="text" name="comentario" [(ngModel)]="comentario.comentario" />
-    <br>
-    <label>Valoracion</label>
-    <input type="text" name="valoracion" [(ngModel)]="comentario.valoracion" />
+    <input disabled type="text" id="nombre" name="nombre" [(ngModel)]="comentario.nombre" />
     <br>
     <label>Profesional</label>
-    <select [(ngModel)]="comentario.profesional" [ngModelOptions]="{standalone:true}">
+    <select id="profesional" *ngIf="this.Usuario.rol == 'paciente'" [(ngModel)]="comentario.profesional" [ngModelOptions]="{standalone:true}">
         <option *ngFor="let profesional of profesionales" value="{{profesional.nombre}} {{profesional.apellidos}}">{{profesional.nombre}} {{profesional.apellidos}}</option>
     </select>
+    <select id="profesional" *ngIf="this.Usuario.rol == 'profesional'" disabled [(ngModel)]="comentario.profesional" [ngModelOptions]="{standalone:true}">
+        <option *ngFor="let profesional of profesionales" value="{{profesional.nombre}} {{profesional.apellidos}}">{{profesional.nombre}} {{profesional.apellidos}}</option>
+    </select>
+    <br>
+    <textarea type="text" name="comentario" [(ngModel)]="comentario.comentario" placeholder="Introduce tu comentario..."></textarea> 
+    <br>
+    <label>Valoracion</label>
+    <input type="number" min="0" max="5" name="valoracion" [(ngModel)]="comentario.valoracion" />
     <br>
     <button (click)="crearComentario()">Crear comentario</button>
 </form>

@@ -17,10 +17,16 @@
             }
             text-align: center;
 
+            textarea{
+                width: 50%;
+                height: 20vh;
+                border-radius: 5px;
+                border: 1px solid #0c354a;
+                color: #0c354a;
+            }
+
             button{
-                margin-top: 5%;
-                width: 10vw;
-                height: 5vh;
+                margin: 2%;
                 border-radius: 5px;
                 border: 1px solid #0c354a;
                 background-color: #0c354a;
@@ -34,6 +40,15 @@
                     color: #0c354a;
                 }
             }
+        }
+    }
+}
+
+// media queries
+@media screen and (max-width: 768px) {
+    .editar-cita-form {
+        div{
+            width: 100%;
         }
     }
 }

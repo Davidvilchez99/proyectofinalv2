@@ -26,7 +26,6 @@ import { CitasUsuariosComponent } from './citas-usuarios/citas-usuarios.componen
 import { CommonModule } from '@angular/common';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +51,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     HttpClientModule,
     FormsModule,
     CommonModule,
-    FullCalendarModule
+    FullCalendarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,6 +3,68 @@
 // @import '~@fullcalendar/daygrid/main.css';
 
 #user-private {
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+      
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        padding: 2%;
+        p{
+            font-size: 1.2em;
+            word-wrap: break-word;
+            margin: 1%;
+        }
+        button{
+            margin: 1%;
+            
+            border-radius: 5px;
+            border: 1px solid #0c354a;
+            background-color: #0c354a;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+
+            &:hover {
+                transition: all 0.3s ease;
+                color: #ffa516;
+            }
+        }
+      }
+      
+      .modal-close {
+        float: right;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9998;
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+
+      
+
+      
     background-color: #f2f2f2;
     // height: 67.8vh;
     // @include flex(center, center, column);
@@ -14,11 +76,10 @@
 
         #botones {
             @include flex(center, center, row);
-
             button {
                 margin: 1%;
-                width: 10vw;
-                height: 5vh;
+                padding: 2%;
+                width: 15vw;
                 border-radius: 5px;
                 border: 1px solid #0c354a;
                 background-color: #0c354a;
@@ -81,7 +142,7 @@
                 div {
                     button {
                         margin-left: 1%;
-                        padding: 2%;
+                        
                         border-radius: 5px;
                         border: 1px solid #0c354a;
                         background-color: #0c354a;
@@ -118,7 +179,7 @@
                     border: none;
                     button{
                         margin: 1%;
-                        padding: 2%;
+                        
                         border-radius: 5px;
                         border: 1px solid #0c354a;
                         background-color: #0c354a;
@@ -147,4 +208,67 @@
 
     
 
+}
+
+// media queries
+@media screen and (max-width: 1024px) {
+    #botones {
+        button {
+            width: 43% !important;
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    #user-private {
+        #container-private-user {
+            flex-direction: column;
+
+            div{
+                width: 100%;
+            }
+
+            #filtrado {
+                input {
+                    width: 50vw;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #user-private {
+        #div-info-btn{
+            flex-direction: column;
+            #botones{
+                flex-direction: column;
+                button{
+                    width: 50vw !important;
+                }
+            }
+        }
+        #container-private-user {
+            #citas{
+                div{
+                    flex-direction: column;
+                    p{
+                        width: 100%;
+                    }
+                    div{
+                        
+                        flex-direction: row;
+                    }
+                }
+            }
+
+            #usuarios{
+                div{
+                    flex-direction: column;
+                    div{
+                        flex-direction: row;
+                    }
+                }
+            }
+        }
+    }
 }

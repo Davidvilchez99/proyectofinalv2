@@ -39,11 +39,18 @@ export class CrearComentarioComponent {
   }
 
   crearComentario(){
+    this.comentario.valoracion.toString();
     this.datos.crearComentario(this.comentario, this.getFechactual());
       this.router.navigate(['/comentarios']);
   }
   ngOnInit() {
-    this.comentario.nombre = this.Usuario.nombre + " " + this.Usuario.apellido;
+    if (this.Usuario.rol == "paciente") {
+      this.comentario.nombre = this.Usuario.nombre + " " + this.Usuario.apellido;
+    }
+    else if (this.Usuario.rol == "profesional") {
+      this.comentario.nombre = "Profesional - "+this.Usuario.nombre + " " + this.Usuario.apellido;
+      this.comentario.profesional = this.Usuario.nombre + " " + this.Usuario.apellido;
+    }
   }
 
 

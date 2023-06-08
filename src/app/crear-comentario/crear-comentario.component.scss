@@ -17,6 +17,18 @@
                margin: 1%;
             }
             text-align: center;
+            #nombre, #profesional{
+                width: 50%;
+
+            }
+
+            textarea{
+                width: 50%;
+                height: 20vh;
+                border-radius: 5px;
+                border: 1px solid #0c354a;
+                color: #0c354a;
+            }
 
             button{
                 margin-top: 5%;
@@ -35,6 +47,15 @@
                     color: #0c354a;
                 }
             }
+        }
+    }
+}
+
+// media queries
+@media screen and (max-width: 768px) {
+    .crear-comentario-form {
+        div{
+            width: 100%;
         }
     }
 }

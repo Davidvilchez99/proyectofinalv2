@@ -1,5 +1,11 @@
 <section id="user-private">
-
+    <div #modal class="modal">
+        <div class="modal-content">
+          <h2 id="modal-title">Modal</h2>
+          <p id="modal-body">Contenido del modal...</p>
+          <button (click)="closeModal()">Cerrar</button>
+        </div>
+      </div>
 
     <div *ngIf="this.Usuario.rol == 'administrativo'">
         <div id="div-info-btn">
@@ -61,11 +67,11 @@
 
             <h3>Lista citas</h3>
             <div id="filtrado"> <label>Filtrar por nombre, apellidos o dni: </label><input type="text"
-                    [(ngModel)]="filterCitesText" (ngModelChange)="filterCites()"
+                    [(ngModel)]="filterCitesText" (ngModelChange)="filterCitesProfesional()"
                     placeholder="Filter by name, last name, or DNI">
             </div>
             <div id="usuarios">
-                <div *ngFor="let cita of filteredCites">
+                <div *ngFor="let cita of filteredCitesProfesional">
                     <p>{{ cita.nombre_paciente }} {{ cita.dni_paciente }} <br> {{ cita.fecha }} - {{cita.hora}}</p>
                     <div>
                         <button [routerLink]="['/cita-usuario',cita.id, 'profesional']">Editar</button>
@@ -88,12 +94,12 @@
 
             <h3>Lista citas</h3>
             <div id="filtrado"> <label>Filtrar por nombre, apellidos o dni: </label><input type="text"
-                    [(ngModel)]="filterCitesText" (ngModelChange)="filterCites()"
+                    [(ngModel)]="filterCitesText" (ngModelChange)="filterCitesPaciente()"
                     placeholder="Filter by name, last name, or DNI">
             </div>
             <div id="usuarios">
-                <div *ngFor="let cita of filteredCites">
-                    <p>{{ cita.nombre_profesional }} {{ cita.dni_profesional }} <br> {{ cita.fecha }} - {{cita.hora}}</p>
+                <div *ngFor="let cita of filteredCitesPaciente">
+                    <p>{{ cita.nombre_profesional }} <br> {{ cita.fecha }} - {{cita.hora}}</p>
                 </div>
             </div>
         </div>

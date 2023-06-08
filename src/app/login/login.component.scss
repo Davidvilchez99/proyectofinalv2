@@ -54,3 +54,13 @@
   }
   
 }
+
+@media (max-width: 768px) {
+    #login-container{
+        padding: 10%;
+        height: 70vh;
+        .login-form{
+            width: 100%;
+        }
+    }
+}

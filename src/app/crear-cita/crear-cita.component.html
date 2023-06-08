@@ -11,7 +11,7 @@
     <br>
     <label>Fecha</label>
     <input [(ngModel)]="fecha" [ngModelOptions]="{standalone:true}" type="date"  placeholder="Enter the date" />
-    <label for="horaInicio">Hora de inicio:</label>
+    <label for="horaInicio">Hora :</label>
     <input type="time" [(ngModel)]="horaInicio" [ngModelOptions]="{standalone:true}" name="horaInicio">
     <br>
     <label>Profesional</label>
@@ -23,9 +23,7 @@
     <br>
     <label>Precio</label>
     <input [(ngModel)]="precio" [ngModelOptions]="{standalone:true}" type="number" min="0"  placeholder="Enter the price" />
-    <br>
-    <label>Descripción</label>
-    <input [(ngModel)]="descripcion" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter the description" />
+    <br>    
     <br>
     <label>Estado</label>
     <select [(ngModel)]="estado" [ngModelOptions]="{standalone:true}">
@@ -33,6 +31,8 @@
         <option value="pagada">Pagada</option>
         <option value="cancelada">Cancelada</option>
     </select>
+    <br>
+    <textarea [(ngModel)]="descripcion" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter the description"></textarea>
     <br>
     <button (click)="crearCita()">Crear</button>
 </form>

@@ -57,3 +57,23 @@ footer{
 
     }
 }
+
+// media queries
+
+@media (max-width: 768px) {
+    footer{
+        // width: 100vw;
+        .container{
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .social-media{
+                @include flex();
+                a{
+                    margin: 1%;
+                }
+            }
+        }
+    }
+}

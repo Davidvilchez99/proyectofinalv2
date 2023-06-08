@@ -33,6 +33,12 @@
         <option value="paciente">Paciente</option>
     </select>
     <br>
+    <label>Imagen dientes incial</label>
+    <input [(ngModel)]="imagenDientesInicial" [ngModelOptions]="{standalone:true}" type="file"  placeholder="Enter your initial teeth image" />
+    <br>
+    <label>Imagen dientes final</label>
+    <input [(ngModel)]="imagenDientesFinal" [ngModelOptions]="{standalone:true}" type="file"  placeholder="Enter your final teeth image" />
+    <br>
     <button (click)="editarUsuario()" >Editar</button>
     <button (click)="borrarUsuario()">Borrar</button>
 
@@ -77,8 +83,6 @@
     <br>
     <label>Cuenta bancaria</label>
     <input [(ngModel)]="datosUsuario.cuentaBancaria" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your bank account" />
-    <br>
-
     <button (click)="editarUsuario()" >Editar</button>
     <button (click)="borrarUsuario()">Borrar</button>
 </form>
