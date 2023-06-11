@@ -13,6 +13,7 @@ import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.componen
 
 import { CrearComentarioComponent } from './crear-comentario/crear-comentario.component';
 import { CitasUsuariosComponent } from './citas-usuarios/citas-usuarios.component';
+import { VerProgresoComponent } from './ver-progreso/ver-progreso.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,10 @@ const routes: Routes = [
   {
     path: 'cita-usuario/:id/:rol',
     component: CitasUsuariosComponent,
+  },
+  {
+    path: 'ver-progreso/:dni',
+    component: VerProgresoComponent,
   }
 
 ];

@@ -1,7 +1,9 @@
 <div class="editar-usuario-form">
     <div>
 <h2>Editar usuario</h2>
-<form *ngIf="datosUsuario.rol == 'paciente'">
+
+<div *ngIf="datosUsuario.rol == 'paciente'">
+    <form>
     <label>Nombre</label>
     <input [(ngModel)]="datosUsuario.nombre" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your name" />
     <br>
@@ -33,16 +35,16 @@
         <option value="paciente">Paciente</option>
     </select>
     <br>
+</form>
     <label>Imagen dientes incial</label>
-    <input [(ngModel)]="imagenDientesInicial" [ngModelOptions]="{standalone:true}" type="file"  placeholder="Enter your initial teeth image" />
+    <input accept=".png, .jpg, .jpeg" (input)="cargarImagen($event, 'inicial')" type="file" />
     <br>
     <label>Imagen dientes final</label>
-    <input [(ngModel)]="imagenDientesFinal" [ngModelOptions]="{standalone:true}" type="file"  placeholder="Enter your final teeth image" />
+    <input accept=".png, .jpg, .jpeg" (input)="cargarImagen($event , 'final')" type="file" />
     <br>
     <button (click)="editarUsuario()" >Editar</button>
     <button (click)="borrarUsuario()">Borrar</button>
-
-</form>
+</div>
 <form *ngIf="datosUsuario.rol == 'profesional'">
     <label>Nombre</label>
     <input [(ngModel)]="datosUsuario.nombre" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your name" />
@@ -83,6 +85,7 @@
     <br>
     <label>Cuenta bancaria</label>
     <input [(ngModel)]="datosUsuario.cuentaBancaria" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your bank account" />
+    <br>
     <button (click)="editarUsuario()" >Editar</button>
     <button (click)="borrarUsuario()">Borrar</button>
 </form>

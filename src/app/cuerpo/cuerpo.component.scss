@@ -37,7 +37,7 @@ main {
         width: 30vw;
         height: 30vh;
         color: white;
-        margin: 10%;
+        margin: 5%;
         font-size: 1.5em;
         hr{
             border: 2px solid #59abb3;
@@ -69,7 +69,7 @@ main {
         width: 30vw;
         height: 30vh;
         color: #0c354a;
-        margin: 5%;
+        margin: 2%;
         position: absolute;
         left: 55%;
         font-size: 1.5em;
@@ -91,7 +91,7 @@ main {
     @include flex(center, center, row);
     width: 100%;
     position: absolute;
-    top: 70vh;
+    top: 75vh;
     text-align: center;
 
     .cuadrados-padres{
@@ -161,10 +161,17 @@ main {
 
             #welcome-son2 {
                 width: 30%;
-
+                overflow: hidden;
+                    display: inline-block;
                 img {
                     width: 100%;
+                    transition: transform 0.25s;
+                    
+                    &:hover {
+                        transform:scale(1.3);
+                    }
                 }
+            
             }
 
         }

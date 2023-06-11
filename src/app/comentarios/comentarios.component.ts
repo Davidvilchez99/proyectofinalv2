@@ -21,18 +21,6 @@ export class ComentariosComponent {
     });
   }
 
-
-  // filtrarComentarios() {
-  //   if (this.filtroValoracion === null) {
-  //     this.comentariosFiltrados = this.datos; // Mostrar todos los comentarios si no hay filtro aplicado
-  //   } else {
-  //     // Filtrar los comentarios por valoración
-  //     this.comentariosFiltrados = this.datos.filter((comentario) => {
-  //       const valoracion = parseInt(comentario.valoracion, 10); // Convertir a número entero
-  //       return valoracion === this.filtroValoracion || valoracion > this.filtroValoracion;
-  //     });
-  //   }
-  // }
   filtrarComentarios() {
     if (this.filtroValoracion === "") { // Comprobar si el filtro está vacío
       this.comentariosFiltrados = this.datos;

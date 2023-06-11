@@ -4,6 +4,7 @@
 <select [(ngModel)]="tipo">
     <option value="paciente">Paciente</option>
     <option value="profesional">Profesional</option>
+    <option value="administrador">Administrador</option>
 </select>
 <br>
 <form *ngIf="tipo == 'paciente'">
@@ -31,7 +32,7 @@
     <label>Contraseña</label>
     <input [(ngModel)]="contrasena" [ngModelOptions]="{standalone:true}" type="password" placeholder="Enter your password" />
     <br>
-    <button (click)="crearProfesional()">Crear</button>
+    <button (click)="crearUsuario('paciente')">Crear</button>
 </form>
 <form *ngIf="tipo == 'profesional'">
     <label>Nombre</label>
@@ -67,7 +68,25 @@
     <label>Contraseña</label>
     <input [(ngModel)]="contrasena" [ngModelOptions]="{standalone:true}" type="password" placeholder="Enter your password" />
     <br>
-    <button (click)="crearProfesional()">Crear</button>
+    <button (click)="crearUsuario('profesional')">Crear</button>
+</form>
+<form *ngIf="tipo == 'administrador'">
+    <label>Nombre</label>
+    <input [(ngModel)]="nombre" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your name" />
+    <br>
+    <label>Apellidos</label>
+    <input [(ngModel)]="apellidos" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your surname" />
+    <br>
+    <label>Dni de la cuenta</label>
+    <input [(ngModel)]="dni" [ngModelOptions]="{standalone:true}" type="text"  placeholder="Enter your dni" />
+    <br>
+    <label>Correo electrónico</label>
+    <input [(ngModel)]="email" [ngModelOptions]="{standalone:true}" type="email"  placeholder="Enter your email" />
+    <br>
+    <label>Contraseña</label>
+    <input [(ngModel)]="contrasena" [ngModelOptions]="{standalone:true}" type="password" placeholder="Enter your password" />
+    <br>
+    <button (click)="crearUsuario('administrador')">Crear</button>
 </form>
 </div>
 </div>

@@ -50,6 +50,7 @@ export class DatosService {
     return collectionData(q, { idField: 'id' });
   }
 
+
   async getCitaUsuario(id: string) {
     const querySnapshot = await getDocs(collection(this.db, "citas"));
     const citaUsuario = [] as any;
@@ -75,7 +76,9 @@ export class DatosService {
       dni: dni,
       presupuesto: presupuesto,
       contraseña: contrasena,
-      fecha: fecha
+      fecha: fecha,
+      imagenInicial : "Imagen no disponible",
+      imagenFinal : "Imagen no disponible",
     });
   }
 
@@ -92,6 +95,19 @@ export class DatosService {
       salario: salario,
       horario: horario,
       cargo: cargo,
+      contraseña: contrasena,
+      fecha: fecha
+    });
+  }
+
+  crearAdministador(rol: string, nombre: string, apellidos: string, email: string, dni: string, contrasena: string, fecha: string) {
+    dni = "admin-" + dni;
+    setDoc(doc(this.db, "usuarios", dni), {
+      rol: "administrativo",
+      nombre: nombre,
+      apellidos: apellidos,
+      email: email,
+      dni: dni,
       contraseña: contrasena,
       fecha: fecha
     });
@@ -132,7 +148,10 @@ export class DatosService {
         dni: datosUsuario.dni,
         presupuesto: datosUsuario.presupuesto,
         contraseña: datosUsuario.contraseña,
-        fecha: datosUsuario.fecha
+        fecha: datosUsuario.fecha,
+        imagenInicial : datosUsuario.imagenInicial,
+        imagenFinal : datosUsuario.imagenFinal,
+        rol : datosUsuario.rol
       });
     }
     else {
@@ -150,8 +169,8 @@ export class DatosService {
         contraseña: datosUsuario.contraseña,
         fecha: datosUsuario.fecha
       });
-      this.router.navigate(['usuario-privado']);
     }
+    this.router.navigate(['usuario-privado']);
   }
 
   crearComentario(comentario: any, fecha: string) {
@@ -191,6 +210,10 @@ export class DatosService {
   async borrarCita(citaId: string) {
     deleteDoc(doc(this.db, "citas", citaId));
 
+  }
+
+  eliminarAdministrativo(dni: string) {
+    deleteDoc(doc(this.db, "usuarios", dni));
   }
 
   editarCitaUsuario(cita: any, citaId: string) {

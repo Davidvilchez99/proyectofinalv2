@@ -36,16 +36,38 @@ export class CrearPacienteComponent {
   
     constructor(public firebase: FirebaseApp, public Usuario: AuthService, public Datos: DatosService, public router: Router) { }
 
-    crearPaciente() {
+    crearUsuario(tipo: string) {
+      if(tipo == "paciente"){
+
       this.rol = "paciente";
+      console.log(this.rol);
+      if (this.rol == "" || this.nombre == "" || this.apellidos == "" || this.telefono == "" || this.email == "" || this.direccion == "" || this.dni == "" || this.presupuesto == 0 || this.contrasena == "") {
+        alert("Rellene todos los campos obligatorios");
+      } else {
       this.Datos.crearPaciente(this.rol, this.nombre, this.apellidos, this.telefono, this.email, this.direccion, this.dni, this.presupuesto, this.contrasena, this.getFechactual());
       this.router.navigate(['/usuario-privado']);
-    }
-
-    crearProfesional(){
+      }
+    }else if(tipo == "profesional"){
       this.rol = "profesional";
+      console.log(this.rol);
+      if (this.rol == "" || this.nombre == "" || this.apellidos == "" || this.telefono == "" || this.email == "" || this.direccion == "" || this.dni == "" || this.cuentaBancaria == "" || this.salario == 0 || this.horario == "" || this.cargo == "" || this.contrasena == "") {
+        alert("Rellene todos los campos obligatorios");
+      }
+      else{
       this.Datos.crearProfesional(this.rol, this.nombre, this.apellidos, this.telefono, this.email, this.direccion, this.dni, this.cuentaBancaria, this.salario, this.horario, this.cargo, this.contrasena, this.getFechactual());
       this.router.navigate(['/usuario-privado']);
+    }
+    }else if(tipo == "administrador"){
+      this.rol = "administrador";
+      console.log(this.rol);
+      if (this.rol == "" || this.nombre == "" || this.apellidos == "" || this.email == "" || this.dni == "" || this.contrasena == "") {
+        alert("Rellene todos los campos obligatorios");
+      }
+      else{
+      this.Datos.crearAdministador(this.rol, this.nombre, this.apellidos, this.email, this.dni, this.contrasena, this.getFechactual());
+      this.router.navigate(['/usuario-privado']);
+    }
+    }
 }
 
     getFechactual(){

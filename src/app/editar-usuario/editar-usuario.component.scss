@@ -6,32 +6,36 @@
     @include flex(flex-start, center, column);
     div{
         margin: 5%;
-        width: 50%;
-        h2 {
+text-align: center;        
+h2 {
             text-align: center;
             margin-bottom: 5%;
         }
+        div{
         form{
             label{
                margin: 1%;
             }
             text-align: center;
 
-            button{
-                margin: 2%;
-                border-radius: 5px;
-                border: 1px solid #0c354a;
-                background-color: #0c354a;
-                color: white;
-                font-size: 1.2em;
-                font-weight: bold;
-
-                &:hover {
-                    transition: all 0.3s ease;
-                    background-color: #ffa516;
-                    color: #0c354a;
-                }
-            }
+            
         }
+        
+    }
+    button{
+        margin: 2%;
+        border-radius: 5px;
+        border: 1px solid #0c354a;
+        background-color: #0c354a;
+        color: white;
+        font-size: 1.2em;
+        font-weight: bold;
+
+        &:hover {
+            transition: all 0.3s ease;
+            background-color: #ffa516;
+            color: #0c354a;
+        }
+    }
     }
 }

@@ -69,10 +69,16 @@ export class CitasUsuariosComponent {
     });
     this.datosService.getDatosUsuario(this.citaUsuario.dni_profesional).subscribe((usuarios) => {
       this.citaUsuario.nombre_profesional = usuarios[0].nombre+" "+usuarios[0].apellidos;
-
-      this.datosService.editarCitaUsuario(this.citaUsuario, this.id);
     });
 
+    // comprobar que los campos esten rellenos
+    if (this.citaUsuario.dni_paciente == "" || this.citaUsuario.dni_profesional == "" || this.citaUsuario.fecha == "" || this.citaUsuario.estado == "" || this.citaUsuario.precio == 0 || this.citaUsuario.descripcion == "" || this.citaUsuario.hora == "") {
+      alert("Rellene todos los campos");
+      return;
+    }
+    else{
+    this.datosService.editarCitaUsuario(this.citaUsuario, this.id);
+    }
 
   }
 }

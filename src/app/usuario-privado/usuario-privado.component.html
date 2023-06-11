@@ -10,7 +10,7 @@
     <div *ngIf="this.Usuario.rol == 'administrativo'">
         <div id="div-info-btn">
             <h3>Bienvenido {{this.Usuario.nombre}} {{this.Usuario.apellido}}</h3>
-            <div id="botones"><button [routerLink]="['/crear-paciente']">Crear paciente</button>
+            <div id="botones"><button [routerLink]="['/crear-paciente']">Crear usuario</button>
                 <button [routerLink]="['/crear-cita']">Crear cita</button>
             </div>
         </div>
@@ -29,9 +29,12 @@
             <div id="usuarios">
                 <div *ngFor="let usuario of filteredUsuarios">
                     <p>{{ usuario.nombre }}  {{ usuario.apellidos }}<br> {{ usuario.dni }} - {{ usuario.rol }}</p>
-                    <div>
+                    <div *ngIf="usuario.rol != 'administrativo'">
                         <button [routerLink]="['/editar-usuario',usuario.dni]">Editar</button>
                         <button (click)="verCitasUsuario( usuario.dni, usuario.nombre, usuario.apellidos, usuario.rol)">Ver citas</button>
+                    </div>
+                    <div *ngIf="usuario.rol == 'administrativo'">
+                        <button (click)="eliminarAdministrativo(usuario.dni)">Eliminar</button>
                     </div>
                 </div>
             </div>
@@ -87,6 +90,8 @@
     <div *ngIf="this.Usuario.rol == 'paciente'">
         <div id="div-info-btn">
             <h3>Bienvenido {{this.Usuario.nombre}} {{this.Usuario.apellido}}</h3>
+            <div id="botones"><button [routerLink]="['/ver-progreso', this.Usuario.dni]">Ver progreso</button></div>
+
         </div>
         <hr>
         <div id="container-private-user">

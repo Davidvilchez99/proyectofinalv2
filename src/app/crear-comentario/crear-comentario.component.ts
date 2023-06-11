@@ -25,7 +25,6 @@ export class CrearComentarioComponent {
   constructor(public Usuario : AuthService, public datos : DatosService, public router: Router) { 
     datos.getUsuarios().subscribe((usuarios) => {
       this.usuarios = usuarios;
-      // console.log(this.usuarios);
       this.obtenerProfesionalesyPacientes();
     });
   }
@@ -39,9 +38,16 @@ export class CrearComentarioComponent {
   }
 
   crearComentario(){
+    //comprobar que los todos campos no esten vacios
+    if (this.comentario.nombre == "" || this.comentario.comentario == "") {
+      alert("Debe completar todos los campos");
+      return;
+    }
+    else{
     this.comentario.valoracion.toString();
     this.datos.crearComentario(this.comentario, this.getFechactual());
       this.router.navigate(['/comentarios']);
+    }
   }
   ngOnInit() {
     if (this.Usuario.rol == "paciente") {

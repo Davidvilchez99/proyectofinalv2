@@ -25,6 +25,7 @@ import { CrearComentarioComponent } from './crear-comentario/crear-comentario.co
 import { CitasUsuariosComponent } from './citas-usuarios/citas-usuarios.component';
 import { CommonModule } from '@angular/common';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { VerProgresoComponent } from './ver-progreso/ver-progreso.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     EditarUsuarioComponent,
     CrearComentarioComponent,
     CitasUsuariosComponent,
+    VerProgresoComponent,
   ],
   imports: [
     BrowserModule,

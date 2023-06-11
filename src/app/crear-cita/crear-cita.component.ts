@@ -44,13 +44,15 @@ export class CrearCitaComponent {
       }
     }
 
-    
-
-
-    
-
     crearCita() {
+      // comprobar que los campos no estan vacios
+      if (this.fecha == "" || this.estado == "" || this.precio == 0 || this.descripcion == "" || this.paciente == "" || this.profesional == "" || this.horaInicio == "") {
+        alert("Rellene todos los campos");
+        return;
+      }
+      else{
       this.datosService.crearCita(this.fecha, this.estado, this.precio, this.descripcion, this.paciente, this.profesional, this.horaInicio);
       this.router.navigate(['/usuario-privado']);
+      }
     }
 }

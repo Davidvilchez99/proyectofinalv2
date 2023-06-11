@@ -37,7 +37,7 @@ export class UsuarioPrivadoComponent {
   constructor(public Usuario: AuthService, public datosService: DatosService, public calendarService: CalendarControllerService) {
     datosService.getUsuarios().subscribe((usuarios) => {
       for (let i = 0; i < usuarios.length; i++) {
-        if (usuarios[i].rol === 'paciente' || usuarios[i].rol === 'profesional') {
+        if (usuarios[i].dni != this.Usuario.dni) {
           if (!this.usuarios.find((user) => user.id === usuarios[i].id)) {
             this.usuarios.push(usuarios[i]);
           }
@@ -261,5 +261,10 @@ export class UsuarioPrivadoComponent {
 
   borrarCita(citaId: string) {
     this.datosService.borrarCita(citaId);
+  }
+
+  eliminarAdministrativo(dni: string) {
+    this.datosService.eliminarAdministrativo(dni);
+    this.usuarios = this.usuarios.filter((usuario) => usuario.dni !== dni);
   }
 }
