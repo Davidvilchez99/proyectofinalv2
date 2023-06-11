@@ -6,7 +6,7 @@ import { PieComponent } from './pie/pie.component';
 import { CuerpoComponent } from './cuerpo/cuerpo.component';
 import { LoginComponent } from './login/login.component';
 import { ComentariosComponent } from './comentarios/comentarios.component';
-import { UsuarioPrivadoComponent } from '../../../../Proyecto final ClinicaDental/proyectofinalv2/src/app/usuario-privado/usuario-privado.component';
+import { UsuarioPrivadoComponent } from '../app/usuario-privado/usuario-privado.component';
 import { CrearCitaComponent } from './crear-cita/crear-cita.component';
 import { CrearPacienteComponent } from './crear-paciente/crear-paciente.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
