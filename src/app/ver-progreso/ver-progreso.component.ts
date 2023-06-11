@@ -16,6 +16,7 @@ export class VerProgresoComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private datosService: DatosService) { }
 
+  // funcion para obtener los datos del usuario
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.dni = params.get('dni');
@@ -24,6 +25,8 @@ export class VerProgresoComponent implements OnInit, OnDestroy {
       });
     });
 
+    // funcion para comparar dos imagenes y mostrar el progreso
+    
     this.slider = document.getElementById('slider') as HTMLInputElement;
     this.frontImage = document.querySelector('.front-img');
 
@@ -56,78 +59,3 @@ export class VerProgresoComponent implements OnInit, OnDestroy {
     this.slider?.removeEventListener('input', handleSliderInput);
   }
 }
-
-
-
-// @HostListener('document:mousedown', ['$event'])
-  // onMouseDown(event: MouseEvent) {
-  //   this.active = true;
-  //   const target = event.target as HTMLElement;
-  //   console.log(target);
-  //   target.classList.add('scrolling');
-  // }
-
-  // @HostListener('document:mouseup')
-  // onMouseUp() {
-  //   this.active = false;
-  //   const scroller = document.querySelector('.scroller');
-  //   if (scroller instanceof HTMLElement) {
-  //     scroller.classList.remove('scrolling');
-  //   }
-  // }
-
-  // @HostListener('document:mouseleave')
-  // onMouseLeave() {
-  //   this.active = false;
-  //   const scroller = document.querySelector('.scroller');
-  //   if (scroller instanceof HTMLElement) {
-  //     scroller.classList.remove('scrolling');
-  //   }
-  // }
-
-  // @HostListener('document:mousemove', ['$event'])
-  // onMouseMove(event: MouseEvent) {
-  //   if (!this.active) return;
-  //   const x = event.pageX - (document.querySelector('.wrapper')?.getBoundingClientRect()?.left || 0);
-  //   this.scrollIt(x);
-  // }
-
-  // scrollIt(x: number) {
-  //   const wrapper = document.querySelector('.wrapper');
-  //   const after = document.querySelector('.after');
-  //   const scroller = document.querySelector('.scroller');
-  //   if (wrapper instanceof HTMLElement && after instanceof HTMLElement && scroller instanceof HTMLElement) {
-  //     const transform = Math.max(0, Math.min(x, wrapper.offsetWidth));
-  //     after.style.width = transform + 'px';
-  //     scroller.style.left = transform - 25 + 'px';
-  //   }
-  // }
-
-  // setOpeningState() {
-  //   this.scrollIt(150);
-  // }
-
-  // @HostListener('document:touchstart', ['$event'])
-  // onTouchStart(event: TouchEvent) {
-  //   this.active = true;
-  //   const target = event.target as HTMLElement;
-  //   target.classList.add('scrolling');
-  // }
-
-  // @HostListener('document:touchend')
-  // onTouchEnd() {
-  //   this.active = false;
-  //   const scroller = document.querySelector('.scroller');
-  //   if (scroller instanceof HTMLElement) {
-  //     scroller.classList.remove('scrolling');
-  //   }
-  // }
-
-  // @HostListener('document:touchcancel')
-  // onTouchCancel() {
-  //   this.active = false;
-  //   const scroller = document.querySelector('.scroller');
-  //   if (scroller instanceof HTMLElement) {
-  //     scroller.classList.remove('scrolling');
-  //   }
-  // }

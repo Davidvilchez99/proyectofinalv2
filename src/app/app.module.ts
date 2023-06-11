@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { ComentariosComponent } from './comentarios/comentarios.component';
 
 /*----------------- */
+// todos los imports de la aplicacion
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { HttpClientModule } from '@angular/common/http';

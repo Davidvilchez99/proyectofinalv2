@@ -12,7 +12,7 @@ export class CabeceraComponent {
     constructor(public Usuario : AuthService, public router: Router) { 
       
     }
-
+    // funcion para cerrar sesion y volver a la pagina de inicio
     cerrarSesion(){
       this.Usuario.cerrarSesion();
 

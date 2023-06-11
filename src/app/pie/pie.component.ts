@@ -11,6 +11,7 @@ export class PieComponent {
 
   constructor(public Usuario: AuthService, public router: Router) { }
 
+  // funcion para volver al principio de la pagina
   ngOnInit(): void {
     window.onscroll = () => {
       this.scrollFunction();
@@ -33,6 +34,7 @@ export class PieComponent {
     document.documentElement.scrollTop = 0;
   }
 
+  // funcion para cerrar sesion y volver a la pagina de inicio
   cerrarSesion(){
     this.Usuario.cerrarSesion();
 

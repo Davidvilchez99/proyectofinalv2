@@ -20,7 +20,7 @@ export class EditarUsuarioComponent implements OnInit {
   imagenDientesFinal: any;
 
   constructor(public route: ActivatedRoute, public datosService: DatosService, public auth: AuthService) { }
-
+  // funcion para obtener los datos del usuario por el dni
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.dni = params.get('dni');
@@ -30,7 +30,7 @@ export class EditarUsuarioComponent implements OnInit {
         });
     });
   }
-  
+  // funcion para subir las imagenes
   cargarImagen(event: any, tipo: string) {
     console.log(event.target.files[0]);
 
@@ -48,7 +48,7 @@ export class EditarUsuarioComponent implements OnInit {
       }
   }
 }
-
+  // funcion para editar los datos del usuario
   editarUsuario() {
     // comprobar que los campos no estan vacios
     if (this.datosUsuario.nombre === '' || this.datosUsuario.apellidos === '' || this.datosUsuario.dni === '' || this.datosUsuario.telefono === '' || this.datosUsuario.email === '') {
@@ -58,7 +58,7 @@ export class EditarUsuarioComponent implements OnInit {
       this.datosService.editarUsuario(this.datosUsuario);
     }
   }
-
+  // funcion para borrar el usuario
   borrarUsuario() {
     this.datosService.borrarUsuario(this.datosUsuario.dni);
   }

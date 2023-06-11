@@ -14,7 +14,7 @@ export class CuerpoComponent {
   constructor(datosService: DatosService, public Usuario : AuthService) {
 
     datosService.getComentarios().subscribe((datos) => {
-      console.log(datos);
+      // obtiene los comentarios con valoracion 4 o 5
       for (let index = 0; index < datos.length; index++) {
         if (datos[index].valoracion == "5" || datos[index].valoracion == "4") {
         this.comentarios.push(datos[index]);

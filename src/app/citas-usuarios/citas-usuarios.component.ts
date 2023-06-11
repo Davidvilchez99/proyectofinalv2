@@ -30,13 +30,14 @@ export class CitasUsuariosComponent {
   profesionales : any[] = [];
 
   constructor(public route: ActivatedRoute, public datosService: DatosService, public auth: AuthService ) { 
+    // guarda todos los usuarios en un array
     datosService.getUsuarios().subscribe((usuarios) => {
       this.usuarios = usuarios;
-      // console.log(this.usuarios);
       this.obtenerProfesionalesyPacientes();
   });
   }
-
+  
+  // funcion para obtener la cita del usuario, coge el id por la url y busca la cita con ese id
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
@@ -52,7 +53,7 @@ export class CitasUsuariosComponent {
     });
   }
   
-
+  // funcion para obtener los pacientes y los profesionales
   obtenerProfesionalesyPacientes(){
     for (let index = 0; index < this.usuarios.length; index++) {
       if (this.usuarios[index].rol == "paciente") {
@@ -62,7 +63,8 @@ export class CitasUsuariosComponent {
       }
     }
   }
-
+  // funcion para editar la cita del usuario
+  // comprueba que los campos esten rellenos y pone el nombre junto es decir nombre y apellidos
   editarCitaUsuario(){
     this.datosService.getDatosUsuario(this.citaUsuario.dni_paciente).subscribe((usuarios) => {
       this.citaUsuario.nombre_paciente = usuarios[0].nombre+" "+usuarios[0].apellidos;
@@ -77,6 +79,7 @@ export class CitasUsuariosComponent {
       return;
     }
     else{
+      // editar la cita del usuario
     this.datosService.editarCitaUsuario(this.citaUsuario, this.id);
     }
 

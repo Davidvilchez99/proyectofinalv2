@@ -6,9 +6,8 @@ import { switchMap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { DatosService } from './datos.service';
 import { Router } from '@angular/router';
-import { CalendarControllerService } from './calendar-controller.service';
 
-
+// servicio para autenticar usuarios
 
 @Injectable({
   providedIn: 'root',
@@ -28,10 +27,10 @@ export class AuthService {
   // private originalAuth: Auth;
 
   
-  constructor(public firestore: Firestore, public datos: DatosService, public router: Router, public calendarService: CalendarControllerService) {
+  constructor(public firestore: Firestore, public datos: DatosService, public router: Router) {
     this.restoreAuthState();
   }
-
+  // comprobar si el usuario esta logueado
   private restoreAuthState() {
     const authState = localStorage.getItem('authState');
     if (authState) {
@@ -54,11 +53,11 @@ export class AuthService {
       this.apellido = apellido;
       this.dni = dni;
 
-      if (rol === 'paciente') {
-        this.obtenerCitasPaciente();
-      } else if (rol === 'profesional') {
-        this.obtenerCitasProfesional();
-      }
+      // if (rol === 'paciente') {
+      //   this.obtenerCitasPaciente();
+      // } else if (rol === 'profesional') {
+      //   this.obtenerCitasProfesional();
+      // }
     }
   }
 
@@ -76,6 +75,7 @@ export class AuthService {
     localStorage.setItem('authState', authState);
   }
 
+  // registrar usuario
   login(usuarioData: string, contraseñaData: string) {
     this.datos.getUsuarios().subscribe((usuarios) => {
       let usuarioEncontrado = false;
@@ -91,11 +91,11 @@ export class AuthService {
           this.dni = usuario.dni;
   
   
-          if (this.rol == 'paciente') {
-            this.obtenerCitasPaciente();
-          } else if (this.rol == 'profesional') {
-            this.obtenerCitasProfesional();
-          }
+          // if (this.rol == 'paciente') {
+          //   this.obtenerCitasPaciente();
+          // } else if (this.rol == 'profesional') {
+          //   this.obtenerCitasProfesional();
+          // }
   
           this.saveAuthState(); // Guardar estado de autenticación
           usuarioEncontrado = true;
@@ -112,6 +112,7 @@ export class AuthService {
     });
   }
 
+    // consultar el rol del usuario logueado para obtener las citas
 
     consultarRolUsuario() {
       // consultar rol de usuario en base de datos usuarios
@@ -121,17 +122,12 @@ export class AuthService {
       datosUsuario.subscribe((datos: any) => {
         this.rol = datos[0].rol;
         this.nombre = datos[0].nombre;
-        if (this.rol == "paciente") {
-          this.obtenerCitasPaciente();
-        }else if (this.rol == "profesional") {
-          this.obtenerCitasProfesional();
-        }
 
       }
       );
     }
 
-    
+    // obtener citas de paciente
     obtenerCitasPaciente (){
       const datos = collection(this.firestore, 'usuarios');
       const q = query(datos, where("email", "==", this.emailUser));
@@ -142,7 +138,7 @@ export class AuthService {
         this.datos.getCitasdePacientes(this.dni).subscribe((citas) => {
           this.citas = citas;
 
-          this.calendarService.getCitasUsuario(this.citas, this.rol);
+          // this.calendarService.getCitasUsuario(this.citas, this.rol);
 
       });
         }
@@ -150,6 +146,7 @@ export class AuthService {
       );
     }
 
+    // obtener citas del usuario
     obtenerCitasUsuario(dni: string, rol: string): Observable<any[]> {
       if (rol == "paciente") {
         return this.datos.getCitasdePacientes(dni);
@@ -162,26 +159,9 @@ export class AuthService {
       });
     }
 
-    obtenerCitasProfesional (){
-      const datos = collection(this.firestore, 'usuarios');
-      const q = query(datos, where("email", "==", this.emailUser));
-      const datosUsuario = collectionData(q, { idField: 'email' });
-      datosUsuario.subscribe((datos: any) => {
-        this.dni = datos[0].dni;  
 
-        this.datos.getCitasdeProfesionales(this.dni).subscribe((citas) => {
-          this.citas = citas;
-          console.log(this.citas);
-          this.calendarService.getCitasUsuario(this.citas, this.rol);
-
-      });
-        }
-        
-      );
-    }
     
-
-
+    // cerrar sesion
     cerrarSesion() {
       this.estaLogueado = false;
       this.logueado = false;

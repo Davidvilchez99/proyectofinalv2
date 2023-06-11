@@ -3,7 +3,6 @@ import { AuthService } from '../auth.service';
 import { DatosService } from '../datos.service';
 import { switchMap } from 'rxjs/operators';
 import { EventInput } from '@fullcalendar/core';
-import {CalendarControllerService} from '../calendar-controller.service';
 import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { Calendar } from '@fullcalendar/core';
@@ -34,7 +33,8 @@ export class UsuarioPrivadoComponent {
 
 
 
-  constructor(public Usuario: AuthService, public datosService: DatosService, public calendarService: CalendarControllerService) {
+  constructor(public Usuario: AuthService, public datosService: DatosService) {
+    // se obtienen todos los usuarios menos el usuario actual
     datosService.getUsuarios().subscribe((usuarios) => {
       for (let i = 0; i < usuarios.length; i++) {
         if (usuarios[i].dni != this.Usuario.dni) {
@@ -46,13 +46,12 @@ export class UsuarioPrivadoComponent {
       this.filterUsuarios();
       this.filterCitesPaciente();
       this.filterCitesProfesional();
-      
-      // this.calendarOptions = this.calendarService.getCalendarOptions();
-    });
+          });
   }
   ngOnInit() {
-    // this.calendarOptions = this.calendarService.getCalendarOptions();
-    
+    // dependiendo del rol del usuario se obtienen las citas de un modo u otro
+    // se crea un calendario con las citas del usuario
+    // si eres administrador se obtienen todas las citas y todos los usuarios    
     if (this.Usuario.rol === 'profesional') {
       this.Usuario.obtenerCitasUsuario(this.Usuario.dni, this.Usuario.rol).subscribe((citas) => {
         this.citasUsuarioProfesional = citas;
@@ -147,7 +146,7 @@ export class UsuarioPrivadoComponent {
     }
     
   }
-
+  // cuando le das al calendario se abre un modal con los datos de la cita
   openModal(cita: any, tipo: string) {
     if (this.modal && tipo === "profesionales") {
       const modalTitle = document.getElementById('modal-title');
@@ -183,7 +182,7 @@ export class UsuarioPrivadoComponent {
             document.body.style.overflow = 'hidden';
     }
   }
-
+  // cuando le das al boton de cerrar se cierra el modal
   closeModal() {
     if (this.modal) {
       this.modal.nativeElement.style.display = 'none';
@@ -191,10 +190,8 @@ export class UsuarioPrivadoComponent {
     }
   }
 
-
+  // filtrar usuarios
   filterUsuarios() {
-    // console.log(this.filterText);
-    // console.log(this.filteredUsuarios);
 
     this.filteredUsuarios = this.usuarios.filter((usuario) => {
       const filter = this.filterText.toLowerCase();
@@ -210,10 +207,8 @@ export class UsuarioPrivadoComponent {
     });
   }
 
+  // filtrar citas
   filterCitesProfesional() {
-    // console.log(this.filterCitesText);
-    // console.log(this.filteredCitesProfesional);
-
     this.filteredCitesProfesional = this.citasUsuarioProfesional.filter((cita) => {
       const filter = this.filterCitesText.toLowerCase();
       const nombre_paciente = cita.nombre_paciente.toLowerCase();
@@ -229,11 +224,8 @@ export class UsuarioPrivadoComponent {
     });
   }
 
+  // filtrar citas del paciente
   filterCitesPaciente() {
-    console.log(this.filterCitesText);
-    console.log(this.filteredCitesPaciente);
-    console.log(this.citasUsuarioProfesional);
-
     this.filteredCitesPaciente = this.citasUsuarioProfesional.filter((cita) => {
       const filter = this.filterCitesText.toLowerCase();
       const nombre_profesional = cita.nombre_profesional.toLowerCase();
@@ -246,7 +238,7 @@ export class UsuarioPrivadoComponent {
 
     });
   }
-
+  // filtrar citas del administrador mediante el dni del paciente
   verCitasUsuario(dni: string, nombre: string, apellidos: string, rol: string) {
     this.Usuario.obtenerCitasUsuario(dni, rol).subscribe((citas) => {
       this.citasUsuarioAdministrador = citas;
@@ -258,11 +250,11 @@ export class UsuarioPrivadoComponent {
       userCiteH3.innerHTML = "Citas de " + nombre + " " + apellidos;
     }
   }
-
+  // borra una cita
   borrarCita(citaId: string) {
     this.datosService.borrarCita(citaId);
   }
-
+  // borra un usuario administrador
   eliminarAdministrativo(dni: string) {
     this.datosService.eliminarAdministrativo(dni);
     this.usuarios = this.usuarios.filter((usuario) => usuario.dni !== dni);

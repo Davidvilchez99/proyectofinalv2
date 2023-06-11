@@ -15,6 +15,7 @@ import { CrearComentarioComponent } from './crear-comentario/crear-comentario.co
 import { CitasUsuariosComponent } from './citas-usuarios/citas-usuarios.component';
 import { VerProgresoComponent } from './ver-progreso/ver-progreso.component';
 
+// rutas de la aplicacion
 const routes: Routes = [
   {
     path: 'cabecera',

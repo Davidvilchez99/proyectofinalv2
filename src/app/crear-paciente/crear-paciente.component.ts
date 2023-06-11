@@ -36,6 +36,8 @@ export class CrearPacienteComponent {
   
     constructor(public firebase: FirebaseApp, public Usuario: AuthService, public Datos: DatosService, public router: Router) { }
 
+
+    // funcion para crear el usuario dependiendo del tipo
     crearUsuario(tipo: string) {
       if(tipo == "paciente"){
 
@@ -69,7 +71,7 @@ export class CrearPacienteComponent {
     }
     }
 }
-
+    // funcion para obtener la fecha actual
     getFechactual(){
       var fechaActual = new Date();
       var horaActual = fechaActual.getHours() + ':' + fechaActual.getMinutes() + ':' + fechaActual.getSeconds();

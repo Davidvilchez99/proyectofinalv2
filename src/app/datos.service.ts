@@ -5,52 +5,55 @@ import { getFirestore, DocumentReference } from 'firebase/firestore';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 
+// servicio para trabajar con la base de datos
+// firebase
+
 @Injectable({
   providedIn: 'root'
 })
 export class DatosService {
-
+  // trae base de datos
   db = getFirestore();
 
   constructor(public firestore: Firestore, public router: Router) {
 
   }
-
+  // obtener usuario por email
   getUserWithEmail(email: string): Observable<any[]> {
     const datos = collection(this.firestore, 'usuarios');
     const q = query(datos, where("email", "==", email));
     return collectionData(q, { idField: 'id' });
   }
-
+  // obtener comentarios
   getComentarios(): Observable<any[]> {
     const datos = collection(this.firestore, 'comentarios');
     return collectionData(datos, { idField: 'id' });
   }
-
+  // obtener usuarios
   getUsuarios(): Observable<any[]> {
     const datos = collection(this.firestore, 'usuarios');
     return collectionData(datos, { idField: 'id' });
   }
-
+  // obtener citas de un paciente
   getCitasdePacientes(dni: string): Observable<any[]> {
     const citasRef = collection(this.firestore, "citas");
     const q = query(citasRef, where("dni_paciente", "==", dni));
     return collectionData(q, { idField: "id" });
   }
-
+  // obtener citas de un profesional
   getCitasdeProfesionales(dni: string): Observable<any[]> {
     const citasRef = collection(this.firestore, "citas");
     const q = query(citasRef, where("dni_profesional", "==", dni));
     return collectionData(q, { idField: "id" });
   }
-
+  // obtener datos de un usuario
   getDatosUsuario(dni: string): Observable<any[]> {
     const datos = collection(this.firestore, 'usuarios');
     const q = query(datos, where("dni", "==", dni));
     return collectionData(q, { idField: 'id' });
   }
 
-
+  // obtener citas de un usuario
   async getCitaUsuario(id: string) {
     const querySnapshot = await getDocs(collection(this.db, "citas"));
     const citaUsuario = [] as any;
@@ -63,8 +66,9 @@ export class DatosService {
   }
 
 
-
-  crearPaciente(rol: string, nombre: string, apellidos: string, telefono: string, email: string, direccion: string, dni: string, presupuesto: number, contrasena: string, fecha: string) {
+  // crear un paciente
+  crearPaciente(rol: string, nombre: string, apellidos: string, telefono: string, email: string, direccion: string, 
+    dni: string, presupuesto: number, contrasena: string, fecha: string) {
 
     setDoc(doc(this.db, "usuarios", dni), {
       rol: rol,
@@ -82,6 +86,7 @@ export class DatosService {
     });
   }
 
+  // crear un profesional
   crearProfesional(rol: string, nombre: string, apellidos: string, telefono: string, email: string, direccion: string, dni: string, cuentaBancaria: string, salario: number, horario: string, cargo: string, contrasena: string, fecha: string) {
     setDoc(doc(this.db, "usuarios", dni), {
       rol: rol,
@@ -100,6 +105,7 @@ export class DatosService {
     });
   }
 
+  // crear un administrador
   crearAdministador(rol: string, nombre: string, apellidos: string, email: string, dni: string, contrasena: string, fecha: string) {
     dni = "admin-" + dni;
     setDoc(doc(this.db, "usuarios", dni), {
@@ -112,7 +118,8 @@ export class DatosService {
       fecha: fecha
     });
   }
-
+  
+  // crear una cita
   crearCita(fecha: string, estado: string, precio: number, descripcion: string, paciente: string, profesional: string, hora: string) {
     let nombrePaciente = "";
     let dniPaciente = "";
@@ -137,6 +144,7 @@ export class DatosService {
     });
   }
 
+  // editar un usuario
   editarUsuario(datosUsuario: any) {
     if (datosUsuario.rol == "paciente") {
       setDoc(doc(this.db, "usuarios", datosUsuario.dni), {
@@ -173,6 +181,7 @@ export class DatosService {
     this.router.navigate(['usuario-privado']);
   }
 
+  // crear un comentario
   crearComentario(comentario: any, fecha: string) {
     addDoc(collection(this.db, "comentarios"), {
       nombre: comentario.nombre,
@@ -183,6 +192,7 @@ export class DatosService {
     });
   }
 
+  // borrar un usuario y sus citas
   async borrarUsuario(dni: string) {
     // Eliminar usuario de la base de datos de Firebase por su dni
     await deleteDoc(doc(this.db, "usuarios", dni));
@@ -206,16 +216,18 @@ export class DatosService {
     this.router.navigate(['usuario-privado']);
   }
   
-
+  // borrar una cita
   async borrarCita(citaId: string) {
     deleteDoc(doc(this.db, "citas", citaId));
 
   }
-
+  
+  // eliminar un administrativo
   eliminarAdministrativo(dni: string) {
     deleteDoc(doc(this.db, "usuarios", dni));
   }
 
+  // editar una cita
   editarCitaUsuario(cita: any, citaId: string) {
     setDoc(doc(this.db, "citas", citaId), {
       fecha: cita.fecha,
